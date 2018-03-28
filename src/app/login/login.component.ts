@@ -32,13 +32,15 @@ export class LoginComponent implements OnInit {
         this.authService.login(this.model.email, this.model.password)
             .subscribe(
                 data => {
-                	if (data) {
+                	if (data !=null) {
+                        debugger
                     this.router.navigate(['/home']);             
-                         }   
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
+                         } 
+                         else
+                         {
+                            error=>this.alertService.error(error);
+                            console.log("error");
+                         }  
                 });
     }
 }

@@ -14,6 +14,7 @@ import { AuthGuard } from './auth.guard';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
 import { PasswordMatchValidator } from './directives/passwordmatch.directive';
+import { ConfigService } from './configuration/config.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import { PasswordMatchValidator } from './directives/passwordmatch.directive';
   imports: [
     BrowserModule,FormsModule,HttpModule,RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard,UserService,AlertService,AuthService],
+  providers: [AuthGuard,UserService,AlertService,AuthService,ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
