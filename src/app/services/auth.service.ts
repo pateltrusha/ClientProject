@@ -11,25 +11,28 @@ import 'rxjs/Rx';
 export class AuthService {
 
  baseUrl: string = '';
+ private loggedIn = false;
  constructor(private http: Http, private router: Router,
              private configService: ConfigService) { 
 
    this.baseUrl = configService.getApiURI();}
 
-     login(email: string, password: string) {
+  login(email: string, password: string) {
    
-        // return this.http.post(this.baseUrl + '/login', { email: email, password: password })
-      let headers = new Headers();
-     headers.append('Content-Type', 'application/json');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
 
     return this.http
       .post(
-     this.baseUrl + '/login',
-      JSON.stringify({ email, password }),{ headers }
-      )
+         this.baseUrl + '/login',
+          JSON.stringify({ email, password }),{ headers }
+          )
          .map(res => res.json())
-            .map(res => {
-                    localStorage.setItem('currentUser', JSON.stringify(res));
+         .map(res => {
+                 if(res!= null){
+                    localStorage.setItem('auth_token', JSON.stringify(res));
+                     this.loggedIn = true;
+                    }
                 return res;
             });
     }
@@ -54,11 +57,17 @@ export class AuthService {
   }
 
      logout() {
+       debugger
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('auth_token');
+         this.loggedIn = false;
         this.router.navigate(['/login']);
     }
 
+
+    isLoggedIn() {
+       return this.loggedIn;
+      }  
 
 
 

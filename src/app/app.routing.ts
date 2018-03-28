@@ -11,7 +11,7 @@ export const routes: Routes =
     { path: 'signup', component: SignupComponent },
     { path: 'resetpassword', component: ResetpasswordComponent },
     { path: 'updatepassword', component: UpdatepasswordComponent },
-    { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent,canActivate:[AuthGuard] },
 
  
     // otherwise redirect to home

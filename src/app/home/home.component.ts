@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
  
 
     constructor(private authService: AuthService) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser = JSON.parse(localStorage.getItem('auth_token'));
         debugger
         console.log(this.currentUser);
     

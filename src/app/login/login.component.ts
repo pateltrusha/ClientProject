@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
     model:any={};
     loading = false;
     returnUrl: string;
+    error:any={};
 
     constructor(
         private route: ActivatedRoute,
@@ -32,15 +33,14 @@ export class LoginComponent implements OnInit {
         this.authService.login(this.model.email, this.model.password)
             .subscribe(
                 data => {
-                	if (data !=null) {
-                        debugger
-                    this.router.navigate(['/home']);             
-                         } 
-                         else
-                         {
-                            error=>this.alertService.error(error);
-                            console.log("error");
-                         }  
-                });
+                    if(data !=null){ 
+                       this.router.navigate(['/home']); 
+                    }
+                    else{
+                    this.alertService.error("Incorrect username or password",true);
+                       } 
+                    }
+                
+                );
     }
 }
