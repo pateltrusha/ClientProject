@@ -21,17 +21,16 @@ export class AuthService {
    
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-
+debugger;
     return this.http
       .post(
-         this.baseUrl + '/login',
+         this.baseUrl + '/users/validateuser',
           JSON.stringify({ email, password }),{ headers }
           )
          .map(res => res.json())
          .map(res => {
                  if(res!= null){
                     localStorage.setItem('auth_token', JSON.stringify(res));
-                     this.loggedIn = true;
                     }
                 return res;
             });

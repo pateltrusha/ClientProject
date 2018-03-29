@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService, AuthService } from '../services/index.service';
-import { User } from '../models/user';
+import { AlertService, AuthService } from '../shared/services/index.service';
+import { User } from'../shared//models/user';
 import { ContextMenuComponent } from 'angular2-contextmenu/src/contextMenu.component';
 import { ContextMenuService } from 'angular2-contextmenu/src/contextMenu.service';
 @Component({

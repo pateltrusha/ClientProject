@@ -8,13 +8,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
-import { AlertComponent } from './directives/alert.component';
-import { AlertService, UserService,AuthService } from './services/index.service';
+import { AlertComponent } from './shared/directives/alert.component';
+import { AlertService, UserService,AuthService } from './shared/services/index.service';
 import { AuthGuard } from './auth.guard';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
-import { PasswordMatchValidator } from './directives/passwordmatch.directive';
-import { ConfigService } from './configuration/config.service';
+import { PasswordMatchValidator } from './shared/directives/passwordmatch.directive';
+import { ConfigService } from './shared/configuration/config.service';
 @NgModule({
   declarations: [
     AppComponent,

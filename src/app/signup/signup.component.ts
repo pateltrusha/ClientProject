@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AlertService, UserService } from '../services/index.service';
-import { User } from '../models/user';
+import { AlertService, UserService } from '../shared/services/index.service';
+import { User } from '../shared/models/user';
 import { NG_VALIDATORS,Validator,Validators,AbstractControl,ValidatorFn } from '@angular/forms';
 @Component({
   selector: 'app-signup',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, AuthService } from '../services/index.service';
+import { AlertService, AuthService } from '../shared/services/index.service';
 
 @Component({
   moduleId: module.id,
@@ -31,9 +31,12 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         
         this.authService.login(this.model.email, this.model.password)
+
             .subscribe(
+
                 data => {
                     if(data !=null){ 
+                        debugger
                        this.router.navigate(['/home']); 
                     }
                     else{
