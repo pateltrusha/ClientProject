@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http,RequestOptions,Response, Headers } from '@angular/http';
-import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { ConfigService } from '../configuration/config.service';
@@ -16,11 +15,20 @@ export class UserService {
      { 
      this.baseUrl = configService.getApiURI();
      }  
-    createUser(user:User){
+    createUser(user){
+
     let body = JSON.stringify(user);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     console.log(user);
-    return this.http.post(this.baseUrl + "/anton_user", body, options);
+    return this.http.post(this.baseUrl + "/users", body, options)
+         .map(res =>res.json() )
+         .catch(err => this.handleError(err));;
   }
+
+   private handleError (error: Response) {
+       console.log(error);
+       console.log("register :", error.json().error)
+      return Observable.throw(error.json().error);
+    }
 }

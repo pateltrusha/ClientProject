@@ -1,10 +1,13 @@
 
 <div class="col-md-6 col-md-offset-3">
+
+
+  {{errorMessage}}
     <h2>Login</h2>
     <form name="form" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" novalidate>
         <div class="form-group">
            <label for="email">Email</label>
-           <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required />
+           <input type="text" class="form-control" name="email" [(ngModel)]="email1" #email="ngModel"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required />
 
             <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
               <div [hidden]="!email.hasError('required')">Email is required</div>
@@ -14,13 +17,16 @@
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+            <input type="password" class="form-control" name="password" [(ngModel)]="password1" #password="ngModel" required />
 
             <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
               <div [hidden]="!password.hasError('required')">password is required</div>
             </div>
         </div>
-        
+          <div class="form-group">
+              <input type="checkbox"  [(ngModel)]="rememberMe"  name="checkbox"/> Remember me
+        </div>
+       
          <div class="form-group">
             <a [routerLink]="['/resetpassword']" class="btn btn-link">Forgot Password?</a>
         </div>

@@ -15,6 +15,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
 import { PasswordMatchValidator } from './shared/directives/passwordmatch.directive';
 import { ConfigService } from './shared/configuration/config.service';
+import {ToastyModule} from 'ng2-toasty';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,7 @@ import { ConfigService } from './shared/configuration/config.service';
     PasswordMatchValidator
   ],
   imports: [
-    BrowserModule,FormsModule,HttpModule,RouterModule.forRoot(routes)
+    BrowserModule,FormsModule,ToastyModule.forRoot(),HttpModule,RouterModule.forRoot(routes)
   ],
   providers: [AuthGuard,UserService,AlertService,AuthService,ConfigService],
   bootstrap: [AppComponent]
