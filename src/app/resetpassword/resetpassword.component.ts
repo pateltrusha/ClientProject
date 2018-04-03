@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/services/index.service';
+import { AuthService,AlertService} from '../shared/services/index.service';
 import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-resetpassword',
@@ -8,21 +8,26 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ResetpasswordComponent implements OnInit {
 	email:string;
-model:any={};
-  constructor(private router: Router, private authService: AuthService) { }
+  
+  constructor(private router: Router,
+              private authService: AuthService, 
+              private alertService: AlertService) { }
 
   ngOnInit() {
   }
 
   reset_pass(){
-  	this.authService.resetPassword(this.model.email )
+    debugger
+  	this.authService.resetPassword(this.email )
             .subscribe(
             	 data => {
                 	if (data) {
-                		this.email=data;
                        this.router.navigate(['/updatepassword']);             
                          }   
-                })
+                } ,
+                error => {
+                          this.alertService.error("Invalid credentials",true);
+                });
                
         }
 

@@ -9,8 +9,8 @@ import{user} from '../models/user';
 
 @Injectable()
 export class AuthService {
- authToken:any;
- baseUrl: string = '';
+    authToken:any;
+    baseUrl: string = '';
  private loggedIn = false;
 
 
@@ -32,36 +32,44 @@ export class AuthService {
           
     }
 
+
+    updatePassword(user){
+
+           let body = JSON.stringify(user);
+           let headers = new Headers({ 'Content-Type': 'application/json' });
+           let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.baseUrl + "/users/resetPassword", body, options)
+         .map(res =>res.json())
+         .catch(err => this.handleError(err));
+    }
+
     private handleError (error: Response) {
-      console.log(error);
-      console.log("service error" ,error.json().error)
+      
       return Observable.throw(error.json().error);
     }
 
-
-
    storeUserData(token) {
+     //store token 
     localStorage.setItem('auth_token', token);
   }
 
 
-	resetPassword(email:string):any{
-		debugger;
-		// return this.http.get('http://localhost:52008/api/anton_user/'+ email)
-  //        .map(res => res.json())
-  //        .do(data => console.log(JSON.stringify(data)))
-     let headers = new Headers();
-     headers.append('Content-Type', 'application/json');
+	resetPassword(email):any{
+	
+        let body = JSON.stringify(user);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
 
-    return this.http
-      .post(
-     this.baseUrl + '/login',
-      JSON.stringify({ email }),{ headers }
-      )
-      .map(res => res.json())
-        .do(data => console.log(JSON.stringify(data)))
+   return this.http.post(this.baseUrl + "/users/resetPassword", body, options)
+         .map(res =>res.json())
+          .do(data => console.log(JSON.stringify(data)))
+         .catch(err => this.handleError(err));
+          
+    }
 
-  }
+
+  
 
      logout() {
         // remove user from local storage to log user out
