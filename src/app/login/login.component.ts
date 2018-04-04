@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
                 data => {
                    this.authService.storeUserData(data);
                    console.log("data: ", data);
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/dashboard']);
                 },
                   error => {
                                 this.alertService.error("Invalid credentials",true);
