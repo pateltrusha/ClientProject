@@ -5,33 +5,20 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { routes } from './app.routing';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { AlertComponent } from './shared/directives/alert.component';
-import { AlertService, UserService,AuthService } from './shared/services/index.service';
 import { AuthGuard } from './auth.guard';
-import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { UpdatepasswordComponent } from './updatepassword/updatepassword.component';
-import { PasswordMatchValidator } from './shared/directives/passwordmatch.directive';
+
 import { ConfigService } from './shared/configuration/config.service';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { UserComponent } from './user/user.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    SignupComponent,
-    AlertComponent,
-    ResetpasswordComponent,
-    UpdatepasswordComponent,
-    PasswordMatchValidator,
-    UserComponent,
+    AppComponent
   ],
   imports: [
-    BrowserModule,FormsModule,HttpModule,RouterModule.forRoot(routes),DashboardModule
+    BrowserModule,FormsModule,HttpModule,RouterModule.forRoot(routes),DashboardModule,UserModule
   ],
-  providers: [AuthGuard,UserService,AlertService,AuthService,ConfigService],
+  providers: [AuthGuard,ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

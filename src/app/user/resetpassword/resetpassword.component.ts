@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService,AlertService} from '../shared/services/index.service';
+import { AuthService,AlertService} from '../../shared/services/index.service';
 import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-resetpassword',

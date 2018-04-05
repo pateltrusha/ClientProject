@@ -5,9 +5,9 @@ import { DashboardComponent } from './dashboard.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { ResultsComponent } from './results/results.component';
 import { AnalysisComponent } from './analysis/analysis.component';
-
+import { AuthGuard } from '../auth.guard';
 export const dashroutes: Routes = [
-	{ path: 'dashboard',component: DashboardComponent,
+	{ path: 'dashboard',component: DashboardComponent,canActivate: [AuthGuard],
         children: [ 
 	       { path: 'collections',component: CollectionsComponent},
 	       { path: 'analysis', component: AnalysisComponent},

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, AuthService } from '../shared/services/index.service';
+import { AlertService, AuthService } from '../../shared/services/index.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -9,7 +9,6 @@ import { AlertService, AuthService } from '../shared/services/index.service';
 export class LoginComponent implements OnInit {
    email1: string;
    password1: string;
-   returnUrl: string;
    rememberMe:boolean;
 
     constructor(
@@ -28,7 +27,7 @@ export class LoginComponent implements OnInit {
         this.authService.logout();
 
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+       ;
      }
     
     login() {
@@ -49,9 +48,12 @@ export class LoginComponent implements OnInit {
         this.authService.login(user)
              .subscribe(
                 data => {
-                   this.authService.storeUserData(data);
-                   console.log("data: ", data);
+                  if(data){
+                    this.authService.storeUserData(data);
+                    console.log("data: ", data);
                     this.router.navigate(['/dashboard']);
+                  }
+                   
                 },
                   error => {
                                 this.alertService.error("Invalid credentials",true);

@@ -9,9 +9,8 @@ import{user} from '../models/user';
 
 @Injectable()
 export class AuthService {
-    authToken:any;
+
     baseUrl: string = '';
- private loggedIn = false;
 
 
  constructor(private http: Http, private router: Router,
@@ -67,22 +66,10 @@ export class AuthService {
          .catch(err => this.handleError(err));
           
     }
-
-
-  
-
      logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('auth_token');
-         this.loggedIn = false;
+    
         this.router.navigate(['/login']);
     }
-
-
-    isLoggedIn() {
-       return this.loggedIn;
-      }  
-
-
-
-}
+ }
