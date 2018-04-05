@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AlertService, UserService } from '../../shared/services/index.service';
-import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
+import { UserService } from '../../shared/services/index.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
  constructor(
         private router: Router,
         private userService: UserService,
-        private alertService: AlertService) {
+        private toastrService: ToastrService) {
 
  }
       ngOnInit() {
@@ -56,12 +56,13 @@ export class SignupComponent implements OnInit {
         this.userService.createUser(newUser)
             .subscribe(
                 data => {
-                    this.alertService.success('Registration successful', true);
+               
+                    this.toastrService.success('Successfully registered !');
                     this.router.navigate(['/login']);
                 },
                 error => {
-                  console.log(error);
-                    this.alertService.error("email is already exists");
+                   this.toastrService.error('email is already exists!');
+                 
                 });
     }
 

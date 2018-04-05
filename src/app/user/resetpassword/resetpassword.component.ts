@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService,AlertService} from '../../shared/services/index.service';
+import { AuthService} from '../../shared/services/index.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.component.html',
@@ -10,8 +11,8 @@ export class ResetpasswordComponent implements OnInit {
 	email:string;
   
   constructor(private router: Router,
-              private authService: AuthService, 
-              private alertService: AlertService) { }
+              private authService: AuthService,
+              private toastrService: ToastrService) { }
 
   ngOnInit() {
   }
@@ -26,7 +27,7 @@ export class ResetpasswordComponent implements OnInit {
                          }   
                 } ,
                 error => {
-                          this.alertService.error("Invalid credentials",true);
+                  this.toastrService.error('Invalid credentials', 'Major Error');          
                 });
                
         }

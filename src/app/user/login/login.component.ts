@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, AuthService } from '../../shared/services/index.service';
-
+import { AuthService } from '../../shared/services/index.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authService: AuthService,
-        private alertService: AlertService) { }
+        private toastrService: ToastrService) { }
 
     ngOnInit() {
 
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
                    
                 },
                   error => {
-                                this.alertService.error("Invalid credentials",true);
+                         this.toastrService.error('Invalid credential!');
                 });
            }
      

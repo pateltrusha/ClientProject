@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, AuthService } from '../../shared/services/index.service';
-
+import { AuthService } from '../../shared/services/index.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-updatepassword',
   templateUrl: './updatepassword.component.html',
@@ -17,7 +17,7 @@ export class UpdatepasswordComponent implements OnInit {
 
         private router: Router,
         private authService: AuthService,
-        private alertService: AlertService) { }
+         private toastrService: ToastrService) { }
 
   ngOnInit() {
   }
@@ -32,13 +32,14 @@ export class UpdatepasswordComponent implements OnInit {
   	this.authService.updatePassword(user)
              .subscribe(
                 data => {
-                 this.alertService.success("Password updated !!",true);
+                 
+                 this.toastrService.success('Password updated !!');
                      console.log("data: ", data);
                     this.router.navigate(['/login']);
                 },
                   error => {
-                       this.alertService.error("Invalid Email",true);
-                });
+                        this.toastrService.error('Invalid Email!');
+                            });
            }
   }
 
