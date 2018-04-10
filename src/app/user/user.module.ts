@@ -20,9 +20,10 @@ import {UserService,AuthService } from '../shared/services/index.service';
     BrowserAnimationsModule,
     ToastrModule.forRoot({
             timeOut: 5000,
-            positionClass: 'toast-top-center',
+            positionClass: 'toast-top-right',
             preventDuplicates: true,
   }), 
+
   ],
   declarations: [
     UserComponent,

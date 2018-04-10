@@ -10,22 +10,23 @@ import { UserComponent } from '../user/user.component';
 
 export const userRoutes: Routes =
 
-                [{ path: '', component: LoginComponent },
+                // [{ path: '', component: LoginComponent },
+                // { path: 'login', component: LoginComponent },
+                // { path: 'signup', component: SignupComponent },
+                // { path: 'resetpassword', component: ResetpasswordComponent },
+                // { path: 'updatepassword', component: UpdatepasswordComponent }]
+
+
+ [
+	{ path: 'user',component: UserComponent,
+        children: [ 	
+       			{ path: '', component: LoginComponent },
                 { path: 'login', component: LoginComponent },
-                { path: 'signup', component: SignupComponent },
-                { path: 'resetpassword', component: ResetpasswordComponent },
-                { path: 'updatepassword', component: UpdatepasswordComponent }]
-
-
- // [
-	// { path: '',component: LoginComponent,
- //        children: [ 	
- //       			{ path: 'login', component: LoginComponent },
- //    			{ path: 'signup', component: SignupComponent },
- //    			{ path: 'resetpassword', component: ResetpasswordComponent },
- //    			{ path: 'updatepassword', component: UpdatepasswordComponent }
-	//       	]
-	//    }];
+    			{ path: 'signup', component: SignupComponent },
+    			{ path: 'resetpassword', component: ResetpasswordComponent },
+    			{ path: 'updatepassword', component: UpdatepasswordComponent }
+	      	]
+	   }];
    
     // otherwise redirect to home
     //{ path: '**', redirectTo: 'dashboard' }]

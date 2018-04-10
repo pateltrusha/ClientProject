@@ -27,8 +27,6 @@ export class UserService {
   }
 
    private handleError (error: Response) {
-       console.log(error);
-       console.log("register :", error.json().error)
       return Observable.throw(error.json().error);
     }
 }

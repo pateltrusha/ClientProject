@@ -7,9 +7,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-   email1: string;
-   password1: string;
-   rememberMe:boolean;
+   _email: string;
+   _password: string;
+   _rememberMe:boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
       if(localStorage.getItem('user_email')!=null)
        {
-          this.email1=localStorage.getItem('user_email');
+          this._email=localStorage.getItem('user_email');
        }
 
         this.authService.logout();
@@ -31,9 +31,9 @@ export class LoginComponent implements OnInit {
      }
     
     login() {
-
-       if(this.rememberMe==true){
-          localStorage.setItem('user_email', this.email1);
+     debugger
+       if(this._rememberMe==true){
+          localStorage.setItem('user_email', this._email);
        }
        
        else{
@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
            }
 
         const user = {
-          "email": this.email1,
-          "password": this.password1
+          "email": this._email,
+          "password": this._password
         }
         
         this.authService.login(user)

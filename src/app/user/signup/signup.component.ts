@@ -11,11 +11,15 @@ import { ToastrService } from 'ngx-toastr';
 export class SignupComponent implements OnInit {
  
  
-  email1: string;
-  password1: string;
-  name1: string;
-  city1: string;
-  company_type1:string;             
+  _email: string;
+  _password: string;
+  _name: string;
+  _city: string;
+  _state: string;
+  _country:string;
+  _postcode:number;
+  _company_type:string;     
+  _company_role:string;        
               
  
 
@@ -32,20 +36,24 @@ export class SignupComponent implements OnInit {
   
 
     register() {
-
+debugger
  const newUser = {
      "user" :{
-          "email":this.email1,
-          "password": this.password1,
-          "name":this.name1
+          "email":this._email,
+          "password": this._password,
+          "name":this._name
      },
      "address":{
-        "name": this.name1,
-        "city":this.city1,
+        "name": this._name,
+        "city":this._city,
+        "state":this._state,
+        "country":this._country,
+        "postcode":this._postcode
       },
       "profile":{
-         "name": this.name1,
-         "company_type":this.company_type1
+         "name": this._name,
+         "company_type":this._company_type,
+         "company_role":this._company_role
       }
    
   }

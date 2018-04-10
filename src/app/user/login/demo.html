@@ -12,7 +12,6 @@
               <div class="usernameError"></div>
                 <input  id="email" type="email" class="validate" name="email" [(ngModel)]="_email" #email="ngModel"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required />
                 <label for="email" class="center-align login-label">Email Address</label>
-                 <label for="error" class="right-align login-label">Invalid email</label>
                 <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
                       <div [hidden]="!email.hasError('required')">Email is required</div>
                       <div [hidden]="!email.hasError('pattern')">Invalid Email</div>
@@ -29,19 +28,15 @@
                 </div>
               </div>
           </div>
-
-
-
           <div class="row margin login-chkbox-container">
                <div class="input-field col s12">
-                    <input type="checkbox"  id="checkbox1" [(ngModel)]="_rememberMe"  name="checkbox"/>
+                    <input type="checkbox"  id="checkbox1" [(ngModel)]="_rememberMe"  name="checkbox"/> Remember me
                     <label for="checkbox1">Remember Password</label>
                 </div>
           </div>
           <div class="row">
              <div class="input-field col s12">
-                  <button  class="btn col s12 primary-btn login-btn" [disabled]="!loginForm.form.valid" >LogIn</button>
-                <!-- <button type="button" [disabled]="!loginForm.form.valid" class="btn col s12 primary-btn login-btn">LogIn</button> -->
+                <button type="button" [disabled]="!loginForm.form.valid" class="btn col s12 primary-btn login-btn">LogIn</button>
              </div>
           </div>
           <div class="row">

@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./resetpassword.component.css']
 })
 export class ResetpasswordComponent implements OnInit {
-	email:string;
+	_email:string;
   
   constructor(private router: Router,
               private authService: AuthService,
@@ -19,7 +19,7 @@ export class ResetpasswordComponent implements OnInit {
 
   reset_pass(){
     debugger
-  	this.authService.resetPassword(this.email )
+  	this.authService.resetPassword(this._email )
             .subscribe(
             	 data => {
                 	if (data) {
@@ -27,7 +27,7 @@ export class ResetpasswordComponent implements OnInit {
                          }   
                 } ,
                 error => {
-                  this.toastrService.error('Invalid credentials', 'Major Error');          
+                  this.toastrService.error('Invalid credentials');          
                 });
                
         }

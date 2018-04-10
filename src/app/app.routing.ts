@@ -5,20 +5,20 @@ import { UserComponent } from './user/user.component';
 //import { DashboardModule } from './dashboard/dashboard.module';
 
 export const routes: Routes = 
- [{ path: '', 
+ [{ path: 'user', 
     component: UserComponent,
     loadChildren: 'app/user/user.module#UserModule'}, 
 
   { path: 'dashboard', 
-    component: DashboardComponent,canActivate: [AuthGuard] ,
+    component: DashboardComponent,
     loadChildren: 'app/dashboard/dashboard.module#DashboardModule' },
 
   { path: '**',
-    redirectTo: '/login',
+    redirectTo: '/user',
     pathMatch: 'full'
   }
 
  ]
 
-
+// ,canActivate: [AuthGuard]
    
