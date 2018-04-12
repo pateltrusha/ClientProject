@@ -23,3 +23,8 @@ i.menu-icon{
   display: inline-block;
   color: green;
 }
+
+#fileLoader
+{
+    display:none;
+}

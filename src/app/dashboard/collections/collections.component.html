@@ -1,32 +1,33 @@
 
-<div class="container">
- 
-    <div class="navbar navbar-default">
-        <div class="navbar-header">
-            <div class="navbar-brand" href>Angular2 File Upload</div>
-        </div>
-    </div>
-    <div class="row">    
-      <div class="col-md-8">
-                <div class="form-group">
-                   <label for="multiple">Drop files</label>
-                      <div ng2FileDrop
-                           [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-                           (fileOver)="fileOverBase($event)"
-                           [uploader]="uploader"
-                           class="well my-drop-zone"> Drop zone
-                     </div>                 
-                </div>          
-         </div>
-         <div class="col-md-4">
-            <form>
-                <div class="form-group">
-                   <label for="multiple">Upload files</label>
-                      <input type="file" class="form-control" name="multiple" ng2FileSelect [uploader]="uploader" multiple  />
-                </div>          
-            </form>
-         </div>
-         <div class="col-md-8">
+<div class="toolbar_container">
+
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-times icon"></i>Delete</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-external-link-square icon"></i>Move</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-copy icon"></i>Copy</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-chain icon"></i>Copy Link</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-pencil icon"></i>Rename</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-code icon"></i>Embed</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-folder icon"></i>Inactive Files</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-flag icon"></i>Abuses</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-folder-open icon"></i>Create Folder</button>
+                <input type="file" id="fileLoader" name="files" #file ng2FileSelect [uploader]="uploader">
+                <button id="btnOpenFileDialog" (click)="file.click()" class="btn_primary">
+                    <i class="fa fa-cloud-upload icon"></i>Upload</button>
+            </div>
+    <div class="content_container">
+
+    <div class="grid_container">
+     <div class="row">    
+         <div class="col-md-12">
             <table class="table">
                 <thead>
                     <tr>
@@ -67,89 +68,22 @@
             
         </div>
     </div>
-</div>
+                    
+                </div>
+                <div class="draganddrop_container">
+                    <div class="dragdroptextcontainer">
+                        <div class="draganddrop_text_container">
+
+                            <i class="fa fa-cloud-upload dragdrop_icon" ng2FileDrop
+                      [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                      (fileOver)="fileOverBase($event)"
+                      [uploader]="uploader"></i>
+                            <label class="draganddrop_text">Drag and Drop Here</label> 
+                        </div>
+                    </div>
+                </div>
+       </div>
+         
         
 
 
-
-<h1> COmmented part</h1>
-
-<!-- <div class="container">
- 
-    <div class="navbar navbar-default">
-        <div class="navbar-header">
-            <div class="navbar-brand" href>Angular2 File Upload</div>
-        </div>
-    </div>
-    <div class="row">
-    	 <div class="col-md-8">
-                <div class="form-group">
-                   <label for="multiple">Drop files</label>
-                      <div ng2FileDrop
-                           [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-                           (fileOver)="fileOverBase($event)"
-                           [uploader]="uploader"
-                           class="well my-drop-zone"> Drop zone
-                     </div>               
-                </div>          
-         </div>
-         <div class="col-md-4">
-            <form>
-                <div class="form-group">
-                   <label for="multiple">Upload files</label>
-                      <input type="file" class="form-control" name="multiple" ng2FileSelect [uploader]="uploader" multiple  />
-                </div>          
-            </form>
-         </div>
-         <div class="col-md-8">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th width="50%">Name</th>
-                        <th>Size</th>
-                        <th>Date</th>
-                        <th>Uploaded</th>
-                        <th>Processed</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of uploader.queue">
-                        <td><strong>{{ item.file.name }}</strong></td>
-                        <td nowrap>{{ item.file.size/1024/1024|number:'.2'}} MB</td>
-                        <td nowrap>{{today|date}}</td>
-	                      <td class="text-center">
-	                          <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-	                         <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-	                      </td>
-                         <td class="text-center">
-                            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                           <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                        </td>
-                        <td nowrap>
-                            <button type="button" class="btn btn-success btn-xs"
-                              (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-                                <span class="glyphicon glyphicon-upload"></span> Upload
-                            </button>
-                            <button type="button" class="btn btn-danger btn-xs"
-                              (click)="item.remove()">
-                                <span class="glyphicon glyphicon-trash"></span> Remove
-                            </button>
-                        </td>
-                    </tr>
-               </tbody>
-            </table>
-            <div>
-              <button type="button" class="btn btn-success btn-s"
-                (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                   <span class="glyphicon glyphicon-upload"></span> Upload all
-              </button>
-              <button type="button" class="btn btn-danger btn-s"
-                (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                   <span class="glyphicon glyphicon-trash"></span> Remove all
-              </button>
-            </div>
-        </div>
-    </div>
-</div>
-         -->

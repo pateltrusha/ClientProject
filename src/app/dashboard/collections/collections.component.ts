@@ -9,6 +9,18 @@ import {IShContextMenuItem, IShContextOptions, BeforeMenuEvent} from 'ng2-right-
 })
 export class CollectionsComponent implements OnInit {
 
+  public uploader:FileUploader = new FileUploader({url:'https://evening-anchorage-3159.herokuapp.com/api/'});
+  public hasBaseDropZoneOver:boolean = false;
+
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+  }
+   _file:any;
+
+ openfileDialog() {
+   debugger
+   this._file.click();
+}
  title = 'Right Click Me';
   items: IShContextMenuItem[];
   dataCtxOne: any;
@@ -67,17 +79,8 @@ console.log(this.items);
 
   ngOnInit() {
   }
- 
 
    today:number=Date.now();
-  public uploader:FileUploader = new FileUploader({url:'https://evening-anchorage-3159.herokuapp.com/api/'});
 
-
- public hasBaseDropZoneOver:boolean = false;
-      
-        
- public fileOverBase(e:any):void {
-    this.hasBaseDropZoneOver = e;
-  }
 
 }

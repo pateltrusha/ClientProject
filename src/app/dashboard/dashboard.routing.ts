@@ -6,12 +6,14 @@ import { CollectionsComponent } from './collections/collections.component';
 import { ResultsComponent } from './results/results.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { AuthGuard } from '../auth.guard';
+import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 export const dashroutes: Routes = [
 	{ path: 'dashboard',component: DashboardComponent,canActivate: [AuthGuard],
         children: [ 
 	       { path: 'collections',component: CollectionsComponent},
 	       { path: 'analysis', component: AnalysisComponent},
-	       { path: 'result', component: ResultsComponent }
+	       { path: 'result', component: ResultsComponent },
+	        { path: 'updateprofile', component: UpdateprofileComponent }
 	       ]
 	   }];
    

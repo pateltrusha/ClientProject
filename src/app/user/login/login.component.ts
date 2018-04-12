@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
                    
                 },
                   error => {
-                         this.toastrService.error('Invalid credential!');
+                         this.toastrService.error('Invalid credential!',);
                 });
            }
      

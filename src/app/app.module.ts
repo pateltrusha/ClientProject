@@ -20,6 +20,7 @@ import { UserModule } from './user/user.module';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
+  
     DashboardModule,
     UserModule
    

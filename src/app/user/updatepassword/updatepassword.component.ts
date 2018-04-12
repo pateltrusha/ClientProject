@@ -10,8 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 
 
 export class UpdatepasswordComponent implements OnInit {
-   email1: string;
-   password1: string;
+   _email: string;
+   _password: string;
 
   constructor(  
 
@@ -25,8 +25,8 @@ export class UpdatepasswordComponent implements OnInit {
   update_pass(){
 
   	  const user = {
-          "email": this.email1,
-          "password": this.password1
+          "email": this._email,
+          "password": this._password
         }
         debugger
   	this.authService.updatePassword(user)

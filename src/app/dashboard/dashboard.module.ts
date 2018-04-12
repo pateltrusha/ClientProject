@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { dashroutes } from './dashboard.routing';
 import { DashboardComponent } from './dashboard.component';
@@ -8,16 +9,17 @@ import { ResultsComponent } from './results/results.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import {ShContextMenuModule} from 'ng2-right-click-menu';
 import { FileSelectDirective, FileDropDirective,FileUploader } from 'ng2-file-upload';
+import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 @NgModule({
   imports: [
     CommonModule,RouterModule.forChild(dashroutes),
-    ShContextMenuModule
+    ShContextMenuModule,FormsModule
   ],
   declarations: [
     FileSelectDirective,
     FileDropDirective,
     DashboardComponent,
     CollectionsComponent, 
-    ResultsComponent, AnalysisComponent]
+    ResultsComponent, AnalysisComponent, UpdateprofileComponent]
 })
 export class DashboardModule { }

@@ -1,57 +1,43 @@
-<form class="login-form signinform" name="form" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" novalidate>
-      <div class="row">
-          <div class="input-field col s12 center">
-            <h4 class="signIn-Header">Sign In</h4>
-                <p>if you don't have an account,
-                 <a class="signinContainer" [routerLink]="['signup']">Sign Up</a>
-                </p>
-          </div>
-      </div>
-      <div class="row margin">
-          <div class="input-field col s12">
-              <div class="usernameError"></div>
-                <input  id="email" type="email" class="validate" name="email" [(ngModel)]="_email" #email="ngModel"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required />
-                <label for="email" class="center-align login-label">Email Address</label>
-                <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-                      <div [hidden]="!email.hasError('required')">Email is required</div>
-                      <div [hidden]="!email.hasError('pattern')">Invalid Email</div>
-                </div>
-          </div>
-      </div>
-      <div class="row margin">
-          <div class="input-field col s12">
-              <div class="usernamePass"></div>
-                <input id="password" type="password" class="validate" name="password" [(ngModel)]="_password" #password="ngModel" required />
-                <label class="login-label" for="password">Password</label>
-                <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-                   <div [hidden]="!password.hasError('required')">password is required</div>
-                </div>
-              </div>
-          </div>
-          <div class="row margin login-chkbox-container">
-               <div class="input-field col s12">
-                    <input type="checkbox"  id="checkbox1" [(ngModel)]="_rememberMe"  name="checkbox"/> Remember me
-                    <label for="checkbox1">Remember Password</label>
-                </div>
-          </div>
-          <div class="row">
-             <div class="input-field col s12">
-                <button type="button" [disabled]="!loginForm.form.valid" class="btn col s12 primary-btn login-btn">LogIn</button>
-             </div>
-          </div>
-          <div class="row">
-            <div class="orlogin-txt col s12">
-               <p class="margin center medium-small sign-up"> or Login with
-                  <a href="login.html"></a>
-                </p>
-             <div class="input-field col s12 socialIconLogin">
-                  <i class="fa fa-facebook"></i>
-                  <i class="fa fa-google-plus"></i>
-                  <i class="fa fa-linkedin"></i>
-             </div>
-            </div>
-          </div>
-          <div class="row div_socialmedia">
-                 <div class="input-field col s12"></div>
+
+<div class="col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+    <form name="form" (ngSubmit)="f.form.valid && update_pass()" #f="ngForm" novalidate>
+        <div class="form-group">
+           <label for="email">Email</label>
+           <input type="text" class="form-control" name="email" [(ngModel)]="email1" #email="ngModel"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required />
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+              <div [hidden]="!email.hasError('required')">Email is required</div>
+              <div [hidden]="!email.hasError('pattern')">Invalid Email</div>
            </div>
-</form> -->
+        </div>
+
+        <!-- <div class="form-group">
+           <label for="code">Activation Code</label>
+           <input type="text" class="form-control" name="code" [(ngModel)]="model.code" #code="ngModel"  required />
+            <div [hidden]="code.valid || code.pristine" class="alert alert-danger">
+              <div [hidden]="!code.hasError('required')">Code is required</div>  
+           </div>
+        </div> -->
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="password1" #password="ngModel" required />
+
+            <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+              <div [hidden]="!password.hasError('required')">Password is required</div>
+              <div [hidden]="!password.hasError('pattern')">Invalid Code</div>
+           </div>
+        </div>
+         <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="confirmPassword1" #confirmPassword="ngModel" validateEqual="password"  required />
+
+            <div [hidden]="confirmPassword.valid || confirmPassword.pristine" class="alert alert-danger">
+              Passwords did not match
+           </div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="!f.form.valid" class="btn btn-primary">Update Password</button>
+        </div>
+    </form>
+</div>
