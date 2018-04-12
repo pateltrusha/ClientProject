@@ -16,11 +16,12 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private authService: AuthService,
         private toastrService: ToastrService) { }
-
+    //@ViewChild('eid') private lb;
     ngOnInit() {
-
+      
       if(localStorage.getItem('user_email')!=null)
-       {
+      {
+        //this.lb.getNativeElement().className = 'center-align login-label active';
           this._email=localStorage.getItem('user_email');
        }
 

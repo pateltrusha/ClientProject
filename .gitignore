@@ -1,2 +1,5 @@
 .gitignore
 node_modules
+/.vs/slnx.sqlite
+/.vs/config/applicationhost.config
+/.vs/ClientProject/v15/.suo

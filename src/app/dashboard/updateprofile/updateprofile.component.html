@@ -1,117 +1,143 @@
-<div class="toolbar_container" style="padding-left: 50px;">
-   <form name="form" (ngSubmit)="f.form.valid && updateProfile()" #f="ngForm" novalidate>
- <div class="address" style="float: left;">
-    <div class="row">
-            <div class="input-field col s12 center">
-                 <h4 class="signIn-Header">Contact Info</h4>    
-            </div>
+<div class="content_container">
+  <form>
+    <div class="grid_container">
+
+      <div class="info_container">
+        <h4>Contact Info</h4>
+      </div>
+      <div class="info_container">
+        <div class="usernameError"></div>
+
+        <label for="lbl_name">Name</label>
+        <input type="text" name="txt_name" id="name" placeholder="Name" [(ngModel)]="_name" #name="ngModel" required />
+      </div>
+
+      <div class="info_container">
+        <div class="usernameError"></div>
+
+        <label for="lbl_institution">Institution</label>
+        <input type="text" name="txt_institution" id="institution" placeholder="Institution" [(ngModel)]="_institution" #institution="ngModel" required />
+      </div>
+
+
+      <div class="info_container">
+        <div class="usernameName"></div>
+       
+        <label for="lbl_occupation">Occupation</label>
+        <input type="text" name="txt_occupation" id="occupation" placeholder="Occupation" [(ngModel)]="_occupation" #occupation="ngModel" required />
+      </div>
+
+
+
+      <div class="info_container">
+
+        <div class="usernameError"></div>
+
+
+        <label for="lbl_phone">Phone</label>
+        <input type="text" name="txt_phone" id="phone" placeholder="Phone" [(ngModel)]="_phone" #phone="ngModel" required />
+      </div>
+
+      <div class="info_container">
+        <div class="usernameError"></div>
+
+
+        <label for="lbl_business_name">Address</label>
+        <input type="text" name="txt_name" id="address" placeholder="Address" [(ngModel)]="_address" #address="ngModel" required />
+      </div>
+
+
+      <div class="info_container">
+        <div class="usernameName"></div>
+
+        <label for="lbl_city">City</label>
+        <input type="text" name="txt_city" id="city" placeholder="City" [(ngModel)]="_city" #city="ngModel" required />
+      </div>
+
+
+
+      <div class="info_container">
+
+        <div class="usernameError"></div>
+
+
+        <label for="lbl_state">State</label>
+        <input type="text" name="txt_state" id="state" placeholder="State" [(ngModel)]="_state" #state="ngModel" required />
+      </div>
+      <div class="info_container">
+        <div class="usernameName"></div>
+
+        <label for="lbl_country">Country</label>
+        <input type="text" name="txt_country" id="country" placeholder="Country" [(ngModel)]="_country" #country="ngModel" required />
+      </div>
+
+      <div class="info_container">
+        <div class="usernameError"></div>
+
+        <label for="lbl_postcode">Postcode</label>
+        <input type="text" name="txt_postcode" id="postcode" placeholder="Postcode" [(ngModel)]="_postcode" #postcode="ngModel" required />
+      </div>
+
+
+
+    </div>
+    <div class="grid_container">
+
+      <div class="info_container">
+        <h4>Company Info</h4>
+      </div>
+
+      <div class="info_container">
+        <div class="usernameError"></div>
+
+        <label for="lbl_name">Name</label>
+        <input type="text" name="txt_name" id="name" placeholder="Name" [(ngModel)]="_name" #name="ngModel" required />
+      </div>
+
+      <div class="info_container">
+        <div class="usernameError"></div>
+
+        <label for="lbl_type">Company Type</label>
+        <input type="text" name="txt_type" id="type" placeholder="Company Type" [(ngModel)]="_type" #type="ngModel" required />
+      </div>
+
+
+      <div class="info_container">
+        <div class="usernameName"></div>
+
+        <label for="lbl_role">Company Role</label>
+        <input type="text" name="txt_role" id="role" placeholder="Company Role" [(ngModel)]="_role" #role="ngModel" required />
+      </div>
+
+
+
+      <div class="info_container">
+
+        <div class="usernameError"></div>
+
+
+        <label for="lbl_description">Description of Company</label>
+        <input type="text" name="txt_description" id="description" placeholder="Description of Company" [(ngModel)]="_description" #description="ngModel" required />
+      </div>
+
+      <div class="info_container">
+        <div class="usernameError"></div>
+
+
+        <label for="lbl_webpage">Webpage</label>
+        <input type="text" name="txt_webpage" id="webpage" placeholder="Webpage" [(ngModel)]="_webpage" #webpage="ngModel" required />
+      </div>
+
+      <div class="info_container">
+        <button type="button" class="btn_primary">
+          Save
+        </button>
+      </div>
+      
+
     </div>
 
-  <div class="row margin">
-        <div class="input-field col s4">
-            <div class="usernameError" ></div>
-            <input id="address" type="text" class="validate"  name="address" [(ngModel)]="_address" #address="ngModel" required />
-                <label for="address" class="center-align login-label">Address</label>    
-        </div>
-  </div>
+  </form>
+  
 
-  <div class="row margin" style="float: left">
-        <div class="input-field col s11">
-             <div class="usernameName"></div>
-                    <input id="username" type="text" class="validate"  name="city" [(ngModel)]="_city" #city="ngModel" required />
-                    <label for="city" class="center-align login-label">City</label>     
-        </div>
-   </div>
-
-   <div class="row margin">
-   	
-        <div class="input-field col s2">
-            <div class="usernameError" ></div>
-            <input id="address" type="text" class="validate"  name="state" [(ngModel)]="_state" #state="ngModel" required />
-                <label for="address" class="center-align login-label">State</label>    
-        </div>
-  </div>
-
-  <div class="row margin"  style="float: left">
-        <div class="input-field col s11">
-             <div class="usernameName"></div>
-                    <input id="username" type="text" class="validate"  name="Country" [(ngModel)]="_country" #country="ngModel" required />
-                    <label for="city" class="center-align login-label">Country</label>     
-        </div>
-   </div> 
-   <div class="row margin">
-   	
-        <div class="input-field col s2">
-            <div class="usernameError" ></div>
-            <input id="address" type="text" class="validate"  name="postcode" [(ngModel)]="_postcode" #postcode="ngModel" required />
-                <label for="postcode" class="center-align login-label">Postcode</label>    
-        </div>
-  </div>
-</div>
-  <div class="company_profile">
-<div class="row">
-            <div class="input-field col s12 center">
-                 <h4 class="signIn-Header">Company Profile</h4>    
-            </div>
-    </div>
-  	 <div class="row margin">
-        <div class="input-field col s4">
-            <div class="usernameError" ></div>
-            <input id="institution" type="text" class="validate"  name="institution" [(ngModel)]="_institution" #institution="ngModel" required />
-                <label for="institution" class="center-align login-label">Institution</label>    
-        </div>
-  </div>
-
-  <div class="row margin" style="float: left">
-        <div class="input-field col s11">
-             <div class="usernameName"></div>
-                    <input id="occupation" type="text" class="validate"  name="occupation" [(ngModel)]="_occupation" #occupation="ngModel" required />
-                    <label for="city" class="center-align login-label">occupation</label>     
-        </div>
-   </div>
-
-
-  <div class="row margin" style="float: left">
-        <div class="input-field col s11">
-             <div class="usernameName"></div>
-                    <input id="company_type" type="text" class="validate"  name="company_type" [(ngModel)]="_company_type" #company_type="ngModel" required />
-                    <label for="city" class="center-align login-label">Company Type</label>     
-        </div>
-   </div>
-
-
-   <div class="row margin">
-        <div class="input-field col s4">
-            <div class="usernameError" ></div>
-            <input id="company_role" type="text" class="validate"  name="company_role" [(ngModel)]="_company_role" #company_role="ngModel" required />
-                <label for="company_role" class="center-align login-label">Role</label>    
-        </div>
-  </div>
-
-  <div class="row margin" style="float: left">
-        <div class="input-field col s11">
-             <div class="usernameName"></div>
-                    <input id="desc_of_company" type="text" class="validate"  name="desc_of_company" [(ngModel)]="_desc_of_company" #desc_of_company="ngModel" required />
-                    <label for="city" class="center-align login-label">desc_of_company</label>     
-        </div>
-   </div>
-
-
-   <div class="row margin">
-        <div class="input-field col s4">
-            <div class="usernameError" ></div>
-            <input id="webpage" type="text" class="validate"  name="webpage" [(ngModel)]="_webpage" #webpage="ngModel" required />
-                <label for="webpage" class="center-align login-label">Web Page</label>    
-        </div>
-  </div>
-  	</div>
-
-
-    <div class="row">
-        <div class="input-field col s2">
-               
-                 <button class="btn col s12 primary-btn login-btn">Update Profile</button>
-        </div>
-   </div>
-</form>  
 </div>

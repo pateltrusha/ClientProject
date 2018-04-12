@@ -394,3 +394,24 @@ footer span{
     padding: 16px 16px 16px 26px;
     float: left;
 }
+.info_container {
+  display: block;
+  padding: 10px;
+}
+
+.grid_container {
+  border: 1px solid #cccccc;
+  padding: 20px 25px;
+  background-color: #fff;
+}
+
+.info_container label {
+  display: block;
+  font-size: 12px;
+}
+
+.info_container input[type=text], .info_container select {
+  width: 350px;
+  height: 35px;
+  padding: 5px 10px;
+}
