@@ -1,7 +1,5 @@
 
-<div class="loginContent col-md-4">
-  <div id="login-page" class="">
-    <div class="col s12 z-depth-6">
+
       <form class="login-form signinform" name="form" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" novalidate>
         <div class="row">
           <div class="input-field col s12 center">
@@ -49,27 +47,10 @@
           </div>
         </div>
         <div class="row margin login-chkbox-container">
-          <div class="input-field col s12">
-            <a class="signinContainer" [routerLink]="['resetpassword']">Forgot Password ?</a>
+          <div class="input-field col s12" >
+            <a class="signinContainer" style="float:right" [routerLink]="['resetpassword']">Forgot Password ?</a>
           </div>
         </div>
-        <div class="row">
-          <div class="orlogin-txt col s12">
-            <p class="margin center medium-small sign-up">
-              or Login with
-              <a href="login.html"></a>
-            </p>
-            <div class="input-field col s12 socialIconLogin">
-              <i class="fa fa-facebook"></i>
-              <i class="fa fa-google-plus"></i>
-              <i class="fa fa-linkedin"></i>
-            </div>
-          </div>
-        </div>
-        <div class="row div_socialmedia">
-          <div class="input-field col s12"></div>
-        </div>
-      </form> -->
-    </div>
-  </div>
-</div>
+       
+      </form>
+    
