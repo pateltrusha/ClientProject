@@ -9,7 +9,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./updateprofile.component.css']
 })
 export class UpdateprofileComponent {
-  _name:string;
+  _name:any;
+  _token:any;
   _city: string;
   _state: string;
   _country:string;

@@ -13,7 +13,7 @@ export const dashroutes: Routes = [
 	       { path: 'collections',component: CollectionsComponent},
 	       { path: 'analysis', component: AnalysisComponent},
 	       { path: 'result', component: ResultsComponent },
-	        { path: 'updateprofile', component: UpdateprofileComponent }
+	       { path:'updateprofile', component: UpdateprofileComponent }
 	       ]
 	   }];
    
