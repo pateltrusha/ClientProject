@@ -59,7 +59,7 @@ debugger
                 data => {
                
                     this.toastrService.success('Successfully updated !');
-                    this.router.navigate(['/login']);
+             
                 },
                 error => {
                    this.toastrService.error('Error while updating!');
