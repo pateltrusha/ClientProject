@@ -10,14 +10,20 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UpdateprofileComponent {
   _name:any;
-  _token:any;
+  _address:string;
   _city: string;
   _state: string;
   _country:string;
   _postcode:number;
-  _company_type:string;     
-  _company_role:string;
+  _phone:number;
+  _institution:string;
+  _occupation:string;
+  _type:string;     
+  _role:string;
+  _description:string;
+  _webpage:string;
 
+   _token=localStorage.getItem('auth_token');
   constructor(private router: Router,
         private userService: UserService,
         private toastrService: ToastrService) { }
@@ -25,34 +31,38 @@ export class UpdateprofileComponent {
   updateProfile(){
   	const updateUser = {
      "user" :{
-          "email":"",
-          "password":"",
-          "name":this._name
+          "token":this._token
+          
      },
      "address":{
         "name": this._name,
         "city":this._city,
         "state":this._state,
         "country":this._country,
-        "postcode":this._postcode
+        "postcode":this._postcode,
+        "phone":this._phone,
+        "institution":this._institution,
+        "occupation":this._occupation
       },
       "profile":{
          "name": this._name,
-         "company_type":this._company_type,
-         "company_role":this._company_role
+         "company_type":this._type,
+         "company_role":this._role,
+         "desc_of_company" : this._description,
+         "webpage": this._webpage
       }
   }
 
-
-   this.userService.createUser(updateUser)
+debugger
+   this.userService.updateUser(updateUser)
             .subscribe(
                 data => {
                
-                    this.toastrService.success('Successfully registered !');
+                    this.toastrService.success('Successfully updated !');
                     this.router.navigate(['/login']);
                 },
                 error => {
-                   this.toastrService.error('email is already exists!');
+                   this.toastrService.error('Error while updating!');
                  
                 });
 }
