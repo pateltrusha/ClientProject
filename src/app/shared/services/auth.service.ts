@@ -20,7 +20,6 @@ export class AuthService {
                this.baseUrl = configService.getApiURI();}
 
   login(user) {
- debugger
     let body = JSON.stringify(user);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -63,9 +62,9 @@ export class AuthService {
       return Observable.throw(error.json().error);
     }
 
-   storeUserData(token) {
+   storeUserData(data) {
      //store token 
-    localStorage.setItem('auth_token', token);
+    localStorage.setItem('auth_token', data.token);
   }
 
 
