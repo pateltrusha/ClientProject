@@ -26,6 +26,17 @@ export class UserService {
          .catch(err => this.handleError(err));;
   }
 
+   updateUser(user){
+debugger
+    let body = JSON.stringify(user);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    console.log(user);
+    return this.http.post(this.baseUrl + "/users/updateUser", body, options)
+         .map(res =>res.json() )
+         .catch(err => this.handleError(err));;
+  }
+
    private handleError (error: Response) {
       return Observable.throw(error.json().error);
     }
