@@ -197,6 +197,7 @@ table {
 .btn_primary:hover {
     background-color: #08a9c5;
 }
+
 .btn_primary i{
     margin-left: -5px;
 }
@@ -399,11 +400,16 @@ footer span{
   padding: 10px;
 }
 
+.info_container_2c {
+  
+  padding: 2px;
+}
 .grid_container {
   border: 1px solid #cccccc;
   padding: 20px 25px;
   background-color: #fff;
 }
+
 
 .info_container label {
   display: block;
