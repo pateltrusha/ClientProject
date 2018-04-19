@@ -6,7 +6,9 @@ import { HttpModule } from '@angular/http';
 import { routes } from './app.routing';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ContextMenuModule } from 'ngx-contextmenu/lib/index';
+//import { ContextMenuModule } from '../lib/index';
 import { ConfigService } from './shared/configuration/config.service';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
@@ -20,7 +22,11 @@ import { UserModule } from './user/user.module';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
-  
+    ModalModule.forRoot(),
+     ContextMenuModule.forRoot({
+      autoFocus: true,
+      // useBootstrap4: true,
+    }),
     DashboardModule,
     UserModule
    

@@ -1,6 +1,8 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
-import {IShContextMenuItem, IShContextOptions, BeforeMenuEvent} from 'ng2-right-click-menu';
+import { ContextMenuService, ContextMenuComponent } from 'ngx-contextmenu/lib/index'
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Component({
   selector: 'app-collections',
     encapsulation: ViewEncapsulation.None,
@@ -8,78 +10,44 @@ import {IShContextMenuItem, IShContextOptions, BeforeMenuEvent} from 'ng2-right-
   styleUrls: ['./collections.component.css']
 })
 export class CollectionsComponent implements OnInit {
+    closeResult: string;
+    _file:any;
+    template:any;
+    msg:string="Hello ANgular";
+    hideVal:boolean=false
 
   public uploader:FileUploader = new FileUploader({url:'https://evening-anchorage-3159.herokuapp.com/api/'});
   public hasBaseDropZoneOver:boolean = false;
 
-  public fileOverBase(e:any):void {
-    this.hasBaseDropZoneOver = e;
-  }
-   _file:any;
-
- openfileDialog() {
-   debugger
-   this._file.click();
-}
- title = 'Right Click Me';
-  items: IShContextMenuItem[];
-  dataCtxOne: any;
-  options: IShContextOptions;
-
-  constructor() {
-    this.dataCtxOne = {
-      One: 'One'
-    };
-
-    this.items = [
-      {
-        label: 'Preview',
-        onClick: this.clickEvent
-      }, 
-       {
-        label: 'Rename',
-        onClick: this.clickEvent
-      } ,
-      {
-        label: 'Remove',
-        onClick: this.clickEvent
-      } ,
-      {
-        divider: true
-      },
-      {
-        label: 'Upload file',
-        onClick: this.uploadFile
-      },
-     
-    ];
-console.log(this.items);
-   
-
-    this.options = {
-      rtl: true,
-      theme: 'dark'
-    };
-  }
-
-  onBefore = (event: BeforeMenuEvent) => {
-    console.log(event);
-    event.open([event.items[0]]);
-    
-
-  };
-
-  clickEvent = ($event: any) => {
-    console.log('clicked ', $event);
-  }
-
-  uploadFile=()=>{
-    console.log("file uploaded");
+  constructor(private modalService: BsModalService) {
   }
 
   ngOnInit() {
   }
 
+  
+  showText(){
+  
+  this.hideVal=true;
+}
+   
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+    }
+  
+ openfileDialog() {
+   debugger
+   this._file.click();
+  }
+
+  modalRef: BsModalRef;
+ openModal(t) {
+   
+    this.modalRef = this.modalService.show(t);
+  }
+  
+
+  
    today:number=Date.now();
 
 

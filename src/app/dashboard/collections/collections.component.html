@@ -1,3 +1,28 @@
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="//placehold.it/1000x600" class="img-responsive">
+  </div>
+</ng-template>
+
+<ng-template #template_NF>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New Folder</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input type="text" placeholder="Folder Name"><br>
+    <button> Create </button> 
+    <button (click)="modalRef.hide()"> Cancel</button>
+  </div>
+</ng-template>
 
 <div class="toolbar_container">
 
@@ -24,7 +49,7 @@
                     <i class="fa fa-cloud-upload icon"></i>Upload</button>
             </div>
     <div class="content_container">
-
+     <button>CLick</button>
     <div class="grid_container">
      <div class="row">    
          <div class="col-md-12">
@@ -40,8 +65,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of uploader.queue">
-                        <td [sh-context]="items" [sh-data-context]="dataCtxOne"><strong>{{ item.file.name }}</strong></td>
+                    <tr *ngFor="let item of uploader.queue" [contextMenu]="componentMenu"
+      [contextMenuSubject]="item">
+                        <td (execute)="openModal(template)" *ngIf="!hideVal" ><strong>{{ item.file.name }}</strong></td>
+                        <td *ngIf="hideVal" > <input type="text" [value]="item.file.name">
                         <td nowrap>{{ item.file.size/1024/1024|number:'.2'}} MB</td>
                         <td nowrap contenteditable='true'>{{today|date}}</td>
                         <td class="text-center">
@@ -65,6 +92,29 @@
                     </tr>
                </tbody>
             </table>
+      <context-menu #componentMenu>
+            <ng-template contextMenuItem (execute)="openModal(template)">
+              Preview
+            </ng-template>
+          
+            <ng-template contextMenuItem let-item (execute)="showText()">
+            Rename
+            </ng-template>
+             <ng-template contextMenuItem let-item (execute)="showText()">
+             Move To
+            </ng-template>
+       
+             <ng-template contextMenuItem let-item (execute)="file.click()">
+            Upload File
+            </ng-template>
+            <ng-template contextMenuItem let-item (execute)="openModalNF(template_NF)">
+            Create Folder
+            </ng-template>
+
+            <ng-template contextMenuItem let-item (execute)="showText()">
+            Remove File
+            </ng-template>
+    </context-menu>
             
         </div>
     </div>
@@ -83,7 +133,9 @@
                     </div>
                 </div>
        </div>
-         
-        
+
+
+
+       
 
 

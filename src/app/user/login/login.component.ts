@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../shared/services/index.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -10,7 +10,11 @@ export class LoginComponent implements OnInit {
    _email: string;
    _password: string;
    _rememberMe:boolean;
-
+@ViewChild(ToastContainerDirective) toastContainer: ToastContainerDirective;
+onClick() {
+  alert("hi");
+    this.toastrService.success('in div');
+  }
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -18,7 +22,7 @@ export class LoginComponent implements OnInit {
         private toastrService: ToastrService) { }
     //@ViewChild('eid') private lb;
     ngOnInit() {
-      
+      this.toastrService.overlayContainer = this.toastContainer;
       if(localStorage.getItem('user_email')!=null)
       {
         //this.lb.getNativeElement().className = 'center-align login-label active';

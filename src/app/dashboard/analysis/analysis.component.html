@@ -1,3 +1,39 @@
 <p>
   analysis works!
 </p>
+
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="//placehold.it/1000x600" class="img-responsive">
+  </div>
+</ng-template>
+
+
+<h1>Angular2 Context Menu Demo</h1>
+ <span *ngIf="!hideVal">{{msg}}</span>
+ <input *ngIf="hideVal" type="text" [value]="msg">
+<button (click)="showText()">Click Me</button>
+
+<div class="dashboardContainer" style="pointer-events: none">
+  <div class="componentsContainer">
+    <div class="componentContainer" *ngFor="let item of items" style="pointer-events: all" [ngStyle]="item.layout" [contextMenu]="componentMenu"
+      [contextMenuSubject]="item">
+      {{ item.name }}
+    </div>
+    <context-menu #componentMenu>
+      <ng-template contextMenuItem (execute)="openModal(template)">
+        Open modal!
+      </ng-template>
+      <ng-template contextMenuItem let-item (execute)="showText()">
+       Open TextBox
+      </ng-template>
+    </context-menu>
+  </div>
+</div>

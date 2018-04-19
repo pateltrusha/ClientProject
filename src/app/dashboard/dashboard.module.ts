@@ -10,10 +10,13 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import {ShContextMenuModule} from 'ng2-right-click-menu';
 import { FileSelectDirective, FileDropDirective,FileUploader } from 'ng2-file-upload';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
+
+import { ContextMenuModule } from 'ngx-contextmenu/lib/index'
+//import { ContextMenuModule } from '../../lib/index';
 @NgModule({
   imports: [
     CommonModule,RouterModule.forChild(dashroutes),
-    ShContextMenuModule,FormsModule
+    ShContextMenuModule,FormsModule,ContextMenuModule
   ],
   declarations: [
     FileSelectDirective,
