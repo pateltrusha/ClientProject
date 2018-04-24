@@ -10,6 +10,9 @@ export class UserService {
 
    baseUrl: string ='';
 
+
+   token=localStorage.getItem('auth_token');
+
     constructor(private http: Http, private router: Router,
                 private configService: ConfigService )
      { 
@@ -24,7 +27,18 @@ export class UserService {
     return this.http.post(this.baseUrl + "/users", body, options)
          .map(res =>res.json() )
          .catch(err => this.handleError(err));;
-  }
+     }
+      getUser(){
+   
+
+   let headers: Headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.token);
+  let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.baseUrl + "/users/getUser",options)
+         .map(res =>res.json())
+         .catch(err => this.handleError(err));
+     }
 
    updateUser(user){
 debugger
@@ -34,7 +48,7 @@ debugger
     console.log(user);
     return this.http.post(this.baseUrl + "/users/updateUser", body, options)
          .map(res =>res.json() )
-         .catch(err => this.handleError(err));;
+         .catch(err => this.handleError(err));
   }
 
    private handleError (error: Response) {

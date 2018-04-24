@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService} from '../../shared/services/index.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
     moduleId: module.id,
   selector: 'app-resetpassword',
@@ -23,6 +24,7 @@ export class ResetpasswordComponent implements OnInit {
           "email": this._email,
         }
     debugger
+
   	this.authService.resetPassword(user )
             .subscribe(
             	 data => {

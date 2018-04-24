@@ -1,64 +1,66 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import{user} from '../../shared/models/user';
 import { AuthService } from '../../shared/services/index.service';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 @Component({
+   moduleId: module.id,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-   _email: string;
-   _password: string;
-   _rememberMe:boolean;
+  user: user = {
+    email:'',
+    password:'',
+    name:'',
+    token:''
+  };
+  _rememberMe:boolean;
+
+
 @ViewChild(ToastContainerDirective) toastContainer: ToastContainerDirective;
-onClick() {
-  alert("hi");
-    this.toastrService.success('in div');
-  }
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private authService: AuthService,
         private toastrService: ToastrService) { }
-    //@ViewChild('eid') private lb;
+  
     ngOnInit() {
+
       this.toastrService.overlayContainer = this.toastContainer;
+
       if(localStorage.getItem('user_email')!=null)
       {
-        //this.lb.getNativeElement().className = 'center-align login-label active';
-          this._email=localStorage.getItem('user_email');
+          // store user email if chechbox is checked
+          this.user.email=localStorage.getItem('user_email');
        }
 
         this.authService.logout();
 
-        // get return url from route parameters or default to '/'
-       ;
+        // get return url from route parameters or default to '/'   
      }
     
     login() {
-     debugger
+        console.log(this.user);
        if(this._rememberMe==true){
-          localStorage.setItem('user_email', this._email);
-       }
+         //set value in localstorage
+          localStorage.setItem('user_email', this.user.email);
+        }
        
        else{
             localStorage.removeItem('user_email');
            }
 
-        const user = {
-          "email": this._email,
-          "password": this._password
-        }
-        
-        this.authService.login(user)
+       //call service
+        this.authService.login(this.user)
              .subscribe(
                 data => {
                   if(data){
+                    //store auth token
                     this.authService.storeUserData(data);
-                    console.log("data: ", data);
                     this.router.navigate(['/dashboard']);
-                  }
-                   
+                  } 
                 },
                   error => {
                          this.toastrService.error('Invalid credential!',);

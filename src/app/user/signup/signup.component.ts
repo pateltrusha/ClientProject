@@ -1,19 +1,25 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { UserService } from '../../shared/services/index.service';
 import { ToastrService } from 'ngx-toastr';
-
+import{user} from '../../shared/models/user';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
- 
- 
-  _email: string;
-  _password: string;
-  _name: string;
+   
+    user: user = {
+          email:'',
+          password:'',
+          name:'',
+          token:''
+        };
+  
+  // _email: string;
+  // _password: string;
+  // _name: string;
           
              
 
@@ -30,13 +36,10 @@ export class SignupComponent implements OnInit {
 
     register() {
  const newUser = {
-     "user" :{
-          "email":this._email,
-          "password": this._password,
-          "name":this._name
-     }
-   
+     "user":this.user
   }
+  console.log(newUser);
+  debugger
     this.userService.createUser(newUser)
             .subscribe(
                 data => {

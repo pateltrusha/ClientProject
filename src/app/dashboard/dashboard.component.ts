@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
   }
 
    logout(){
-   	debugger;
    	  this.authService.logout();
    }
 }

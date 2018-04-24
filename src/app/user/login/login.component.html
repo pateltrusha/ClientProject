@@ -13,7 +13,7 @@
         <div class="row margin">
           <div class="input-field col s12">
             <div class="usernameError"></div>
-            <input id="email" type="email" class="validate" name="email" [(ngModel)]="_email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
+            <input id="email" type="email" class="validate" name="email" [(ngModel)]="user.email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
             <label for="email" #eid class="center-align login-label">Email Address</label>
             <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
               <div [hidden]="!email.hasError('required')">Email is required</div>
@@ -24,7 +24,7 @@
         <div class="row margin">
           <div class="input-field col s12">
             <div class="usernamePass"></div>
-            <input id="password" type="password" class="validate" name="password" [(ngModel)]="_password" #password="ngModel" required />
+            <input id="password" type="password" class="validate" name="password" [(ngModel)]="user.password" #password="ngModel" required />
             <label class="login-label" for="password">Password</label>
             <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
               <div [hidden]="!password.hasError('required')">password is required</div>
@@ -54,4 +54,4 @@
        
       </form>
     
-  <div toastContainer  class="myDiv"></div>
+ 

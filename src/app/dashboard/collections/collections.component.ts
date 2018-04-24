@@ -25,7 +25,7 @@ export class CollectionsComponent implements OnInit {
   ngOnInit() {
   }
 
-  
+
   showText(){
   
   this.hideVal=true;
@@ -46,6 +46,7 @@ export class CollectionsComponent implements OnInit {
     this.modalRef = this.modalService.show(t);
   }
   
+   
 
   
    today:number=Date.now();

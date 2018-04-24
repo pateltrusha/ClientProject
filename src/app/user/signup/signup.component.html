@@ -12,7 +12,7 @@
    <div class="row margin">
         <div class="input-field col s12">
              <div class="usernameName"></div>
-                    <input id="username" type="text" class="validate"  name="name" [(ngModel)]="_name" #name="ngModel" required />
+                    <input id="username" type="text" class="validate"  name="name" [(ngModel)]="user.name" #name="ngModel" required />
                     <label for="username" class="center-align login-label">Name</label>
                     <span [hidden]="name.valid || name.pristine" >
                              <span  class="error" [hidden]="!name.hasError('required')">name is required</span>
@@ -23,7 +23,7 @@
   <div class="row margin">
         <div class="input-field col s12">
             <div class="usernameError" ></div>
-                <input id="email" type="email" class="validate"  required [(ngModel)]="_email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
+                <input id="email" type="email" class="validate"  required [(ngModel)]="user.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel">
                 <span [hidden]="email.valid || email.pristine" class="error">
                         <span [hidden]="!email.hasError('required')">Email is required</span>
                         <span [hidden]="!email.hasError('pattern')">Invalid Email</span>
@@ -35,7 +35,7 @@
   <div class="row margin">
         <div class="input-field col s12">
             <div class="usernamePass"></div>
-                <input id="password" type="password" class="validate" name="password" [(ngModel)]="_password" #password="ngModel" required />
+                <input id="password" type="password" class="validate" name="password" [(ngModel)]="user.password" #password="ngModel" required />
                 <label class="login-label" for="password">Password</label>
                     <span [hidden]="password.valid || password.pristine" class="error">
                              <span [hidden]="!password.hasError('required')">Password is required</span>
