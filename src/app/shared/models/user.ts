@@ -1,4 +1,29 @@
 
+
+export interface users {
+  name: string;
+  token:string;
+  address: {
+    name: string;
+    confirm: string;
+    institution:string;
+    occuption:string;
+    phone:string;
+    address:string;
+    city:string;
+    state:string;
+    country:string;
+    postcode:string;
+  },
+
+  profile:{
+      name: string;  
+    company_type: string,
+    company_role: string;
+    desc_of_company:string;
+    webpage:string;
+  }
+}
 export interface user{
 	email:string;
     password:string;
@@ -24,10 +49,10 @@ export interface profile {
     webpage:string;
 }
 
-export interface users {
+// export interface users {
 
-    user:user;
-    address:address;
-    profile:profile;
-}
-   
+//     user:user;
+//     address:address;
+//     profile:profile;
+// }
+//    

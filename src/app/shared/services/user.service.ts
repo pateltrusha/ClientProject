@@ -28,7 +28,7 @@ export class UserService {
          .map(res =>res.json() )
          .catch(err => this.handleError(err));;
      }
-      getUser(){
+      getUser(): Observable<any>{
    
 
    let headers: Headers = new Headers();
@@ -41,7 +41,7 @@ export class UserService {
      }
 
    updateUser(user){
-debugger
+
     let body = JSON.stringify(user);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
