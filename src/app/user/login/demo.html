@@ -1,43 +1,175 @@
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="//placehold.it/1000x600" class="img-responsive">
+  </div>
+</ng-template>
 
-<div class="col-md-6 col-md-offset-3">
-    <h2>Login</h2>
-    <form name="form" (ngSubmit)="f.form.valid && update_pass()" #f="ngForm" novalidate>
+<ng-template #template_NF>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New Folder</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input type="text" placeholder="Folder Name"><br>
+    <button> Create </button> 
+    <button (click)="modalRef.hide()"> Cancel</button>
+  </div>
+</ng-template>
+
+<div class="toolbar_container">
+
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-times icon"></i>Delete</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-external-link-square icon"></i>Move</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-copy icon"></i>Copy</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-chain icon"></i>Copy Link</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-pencil icon"></i>Rename</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-code icon"></i>Embed</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-folder icon"></i>Inactive Files</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-flag icon"></i>Abuses</button>
+                <button type="button" class="btn_secondary">
+                    <i class="fa fa-folder-open icon"></i>Create Folder</button>
+                <input type="file" id="fileLoader" name="files" #file ng2FileSelect [uploader]="uploader">
+                <button id="btnOpenFileDialog" (click)="file.click()" class="btn_primary">
+                    <i class="fa fa-cloud-upload icon"></i>Upload</button>
+            </div>
+
+
+
+   <form class="form-horizontal" role="form" >
+
         <div class="form-group">
-           <label for="email">Email</label>
-           <input type="text" class="form-control" name="email" [(ngModel)]="email1" #email="ngModel"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required />
-            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-              <div [hidden]="!email.hasError('required')">Email is required</div>
-              <div [hidden]="!email.hasError('pattern')">Invalid Email</div>
-           </div>
-        </div>
+            <label class="control-label col-sm-4" for="myname" style="">Name<span class="asterisk">*</span></label>
+            <div class="col-sm-7">
+                <div>
+                    <input type="text" class="form-control" id="myname"
+                    [(ngModel)]="myfile.name">                        
+                </div>                  
+            </div>                               
+        </div>        
 
-        <!-- <div class="form-group">
-           <label for="code">Activation Code</label>
-           <input type="text" class="form-control" name="code" [(ngModel)]="model.code" #code="ngModel"  required />
-            <div [hidden]="code.valid || code.pristine" class="alert alert-danger">
-              <div [hidden]="!code.hasError('required')">Code is required</div>  
-           </div>
-        </div> -->
 
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="password1" #password="ngModel" required />
+            <label class="control-label col-sm-4" for="myimage">Image</label>
+            <div class="col-sm-7">
+                <div>
+                    <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />                         
+                </div>   
+            </div>
+        </div>
 
-            <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-              <div [hidden]="!password.hasError('required')">Password is required</div>
-              <div [hidden]="!password.hasError('pattern')">Invalid Code</div>
-           </div>
-        </div>
-         <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="confirmPassword1" #confirmPassword="ngModel" validateEqual="password"  required />
 
-            <div [hidden]="confirmPassword.valid || confirmPassword.pristine" class="alert alert-danger">
-              Passwords did not match
-           </div>
+        <div class="form-group">        
+        <div class="text-center">
+            <button type="button" (click)="upload()">Upload</button>             
         </div>
-        <div class="form-group">
-            <button [disabled]="!f.form.valid" class="btn btn-primary">Update Password</button>
         </div>
-    </form>
-</div>
+  </form>
+
+
+      
+            
+    <div class="content_container">
+     <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+<button type="button" (click)="uploadFile()>Upload</button>
+
+    <div class="grid_container">
+     <div class="row">    
+         <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="50%">Name</th>
+                        <th>Size</th>
+                        <th>Date</th>
+                        <th>Uploaded</th>
+                        <th>Processed</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of uploader.queue" [contextMenu]="componentMenu"
+      [contextMenuSubject]="item">
+                        <td (execute)="openModal(template)" *ngIf="!hideVal" ><strong>{{ item.file.name }}</strong></td>
+                        <td *ngIf="hideVal" > <input type="text" [value]="item.file.name">
+                        <td nowrap>{{ item.file.size/1024/1024|number:'.2'}} MB</td>
+                        <td nowrap contenteditable='true'>{{today|date}}</td>
+                        <td class="text-center">
+                            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                           <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                        </td>
+                         <td class="text-center">
+                            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                           <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                        </td>
+                        <td nowrap>
+                            <button type="button" class="btn btn-success btn-xs"
+                              (click)="uploadFile(item)" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                <span class="glyphicon glyphicon-upload"></span> Upload
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs"
+                              (click)="item.remove()">
+                                <span class="glyphicon glyphicon-trash"></span> Remove
+                            </button>
+                        </td>
+                    </tr>
+               </tbody>
+            </table>
+      <context-menu #componentMenu>
+            <ng-template contextMenuItem (execute)="openModal(template)">
+              Preview
+            </ng-template>
+          
+            <ng-template contextMenuItem let-item (execute)="showText()">
+            Rename
+            </ng-template>
+             <ng-template contextMenuItem let-item (execute)="showText()">
+             Move To
+            </ng-template>
+       
+             <ng-template contextMenuItem let-item (execute)="file.click()">
+            Upload File
+            </ng-template>
+            <ng-template contextMenuItem let-item (execute)="openModal(template_NF)">
+            New Collection
+            </ng-template>
+
+            <ng-template contextMenuItem let-item (execute)="showText()">
+            Remove File
+            </ng-template>
+    </context-menu>
+            
+        </div>
+    </div>
+                    
+                </div>
+                <div class="draganddrop_container">
+                    <div class="dragdroptextcontainer">
+                        <div class="draganddrop_text_container">
+
+                            <i class="fa fa-cloud-upload dragdrop_icon" ng2FileDrop
+                      [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                      (fileOver)="fileOverBase($event)"
+                      [uploader]="uploader"></i>
+                            <label class="draganddrop_text">Drag and Drop Here</label> 
+                        </div>
+                    </div>
+                </div>
+       </div>
+
+

@@ -1,8 +1,9 @@
 
 
 export interface users {
-  name: string;
-  token:string;
+  user:{
+
+   },
   address: {
     name: string;
     confirm: string;

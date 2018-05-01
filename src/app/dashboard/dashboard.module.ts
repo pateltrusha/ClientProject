@@ -10,8 +10,9 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import {ShContextMenuModule} from 'ng2-right-click-menu';
 import { FileSelectDirective, FileDropDirective,FileUploader } from 'ng2-file-upload';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
-
-import { ContextMenuModule } from 'ngx-contextmenu/lib/index'
+import { CollectionService } from '../shared/services/index.service';
+import { ContextMenuModule } from 'ngx-contextmenu/lib/index';
+import { FoldersComponent } from './folders/folders.component'
 //import { ContextMenuModule } from '../../lib/index';
 @NgModule({
   imports: [
@@ -23,6 +24,8 @@ import { ContextMenuModule } from 'ngx-contextmenu/lib/index'
     FileDropDirective,
     DashboardComponent,
     CollectionsComponent, 
-    ResultsComponent, AnalysisComponent, UpdateprofileComponent]
+    ResultsComponent, AnalysisComponent, UpdateprofileComponent, FoldersComponent],
+    providers:[CollectionService]
+
 })
 export class DashboardModule { }

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-    moduleId: module.id,
+  moduleId: module.id,
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.component.html',
   styleUrls: ['./resetpassword.component.css']
@@ -23,12 +23,12 @@ export class ResetpasswordComponent implements OnInit {
     const user = {
           "email": this._email,
         }
-    debugger
 
+   //service call
   	this.authService.resetPassword(user )
             .subscribe(
             	 data => {
-                	debugger
+                	
                        this.router.navigate(['user/updatepassword']);             
                          }   
                 ,

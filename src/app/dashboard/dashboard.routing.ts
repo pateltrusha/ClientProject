@@ -7,9 +7,11 @@ import { ResultsComponent } from './results/results.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { AuthGuard } from '../auth.guard';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
+import { FoldersComponent } from './folders/folders.component'
 export const dashroutes: Routes = [
-	{ path: 'dashboard',component: DashboardComponent,canActivate: [AuthGuard],
+	{ path: 'dashboard',component: DashboardComponent, canActivateChild: [AuthGuard],
         children: [ 
+           { path: '',component: FoldersComponent},
 	       { path: 'collections',component: CollectionsComponent},
 	       { path: 'analysis', component: AnalysisComponent},
 	       { path: 'result', component: ResultsComponent },

@@ -15,10 +15,9 @@ export class UpdatepasswordComponent implements OnInit {
    _code:string;
 
   constructor(  
-
         private router: Router,
         private authService: AuthService,
-         private toastrService: ToastrService) { }
+        private toastrService: ToastrService) { }
 
   ngOnInit() {
   }
@@ -29,19 +28,17 @@ export class UpdatepasswordComponent implements OnInit {
           "email": this._email,
           "password": this._password,
           "code":this._code
-        }
-        debugger
+           }
+     //call service to update password
   	this.authService.updatePassword(user)
              .subscribe(
                 data => {
-                 
-                 this.toastrService.success('Password updated !!');
-                     console.log("data: ", data);
-                    this.router.navigate(['/login']);
+                     this.toastrService.success('Password updated !!');
+                     this.router.navigate(['/login']);
                 },
-                  error => {
-                        this.toastrService.error('Invalid Email!');
-                            });
+                error => {
+                      this.toastrService.error('Invalid Email!');
+                        });
            }
   }
 

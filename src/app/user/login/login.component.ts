@@ -10,10 +10,10 @@ import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   user: user = {
-    email:'',
-    password:'',
-    name:'',
-    token:''
+        email:'',
+        password:'',
+        name:'',
+        token:''
   };
   _rememberMe:boolean;
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
      }
     
     login() {
-        console.log(this.user);
+        
        if(this._rememberMe==true){
          //set value in localstorage
           localStorage.setItem('user_email', this.user.email);
@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
                   } 
                 },
                   error => {
-                         this.toastrService.error('Invalid credential!',);
+                   
+                        this.toastrService.error('Invalid credential!',);
                 });
            }
      

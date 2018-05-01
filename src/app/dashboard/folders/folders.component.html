@@ -1,0 +1,16 @@
+<p>
+  folders works!
+</p>
+<button (click)="showFiles()">clicl</button>
+<ul *ngFor="let c of collections">
+	<li>
+		<a [routerLink]="['collections']" [queryParams]="{ id: c.userId}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{c.name}}</a>
+	</li>
+
+	<li>{{c.userId}}</li>
+</ul>
+
+   <!--  <ul >
+      <li><a (click)="showFiles()"><i class="fas fa-folder" style="font-size:48px;"></i>{{c.name}}
+      </li></a>
+    </ul> -->
