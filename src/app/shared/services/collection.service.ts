@@ -39,7 +39,7 @@ export class CollectionService {
 
      //create new folder
      createFolder(folder){
-       debugger
+      
         let body = JSON.stringify(folder);
       let headers: Headers = new Headers();
           headers.append('Content-Type', 'application/json');
@@ -54,7 +54,7 @@ export class CollectionService {
 
     //rename 
     renameFolder(folder){
-      debugger
+    
       let body = JSON.stringify(folder);
       let headers: Headers = new Headers();
           headers.append('Content-Type', 'application/json');
@@ -78,24 +78,33 @@ export class CollectionService {
                .map(res =>res.json() )
                .catch(err => this.handleError(err));
     }
+
+
+    //get all files
+    getAllfiles(c_id){
+       let body = JSON.stringify(c_id);
+        let headers: Headers = new Headers();
+                  headers.append('Content-Type', 'application/json');
+                  headers.append('Authorization', this.token);
+        let options = new RequestOptions({ headers: headers });
+            
+             return this.http.post(this.baseUrl + "/collection/get_files", body, options)
+                       .map(res =>res.json() )
+                       .catch(err => this.handleError(err));
+    }
      //upload files
 
-     uploadFile(files,u_Cid){
-
-
-  const formData: FormData = new FormData();
-    formData.append('file', files, files.name);
-    formData.append('body', JSON.stringify(u_Cid));
+     uploadFile(payload){
+        
         let headers: Headers = new Headers();
-                  headers.append('Content-Type', 'multipart/form-data');
+                  //headers.append('Content-Type', 'multipart/form-data');
                   headers.append('Authorization', this.token);
         let options = new RequestOptions({ headers: headers});
              
-         debugger
-         let body = JSON.stringify(formData);
-         console.log(body);
-          console.log(formData.getAll('body'));
-        return this.http.post(this.baseUrl + "/collection/new_file", body, options)
+       
+         //let body = JSON.stringify(formData);
+        
+        return this.http.post(this.baseUrl + "/collection/new_file",payload, options)
                 .map(res =>res.json() )
                 .catch(err => this.handleError(err));
      

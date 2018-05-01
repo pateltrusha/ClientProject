@@ -18,6 +18,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 export class CollectionsComponent implements OnInit {
     closeResult: string;
     _file:any;
+    _files:any=[];
     template:any;
     msg:string="Hello ANgular";
     hideVal:boolean=false
@@ -26,7 +27,7 @@ export class CollectionsComponent implements OnInit {
   // public uploader:FileUploader = new FileUploader({url:'https://evening-anchorage-3159.herokuapp.com/api/'});
   public hasBaseDropZoneOver:boolean = false;
 param1:any;
-
+items:any=[];
          // headers1: Headers = new Headers({
          //   'Content-Type': 'application/json',
          //   'Authorization': this.token
@@ -43,24 +44,77 @@ param1:any;
     private collService:CollectionService,) {
 
     // this.baseUrl = configService.getApiURI();
-    console.log('Called Constructor');
+    
     this.param1=this.activatedRoute.snapshot.queryParams["id"];
-    console.log(this.param1);
+    this.getFiles();
   }
+
+ 
 
   ngOnInit() {
    
 }
+ fileChangeEvent(fileInput: any){
+   debugger
+        this.items=fileInput.target.files; 
+        console.log(this.items);   
+     }
 
-items:any;
+_f:any;
+ dropped(fileInput: any){
+    debugger
+    alert("working");
+    this._f = fileInput.target.files; 
+     this.items.push(this._f);
+  }
+
+
+  getFiles(){
+    const file_data={
+       
+       "u_cID":this.param1
+    }
+     this.collService.getAllfiles(file_data)
+     .subscribe(
+                           data => {
+                           console.log(data);
+                             this._files=data;
+                                 },
+                         error => {
+                          
+                           
+                        });
+  }
 uploadFile(){
 
     const file_data={
        
        "u_cID":this.param1
     }
+
+
+
+    const fileEvent: FileList = this.items;
+    const file: File = fileEvent[0];
+    console.log(file);
+
+    let formData: FormData = new FormData();
+
+
+
+    let payload = {
+      file: file,
+      u_cID:this.param1
+    }
+    console.log(payload)
+   
+    formData.append('u_cID', this.param1);
+    formData.append('file', file);
+
+
+    console.log(formData)
 debugger
-     this.collService.uploadFile(this.items,file_data)
+     this.collService.uploadFile(formData)
      .subscribe(
                            data => {
                            console.log(data);
@@ -71,11 +125,6 @@ debugger
                            
                         });
 }
- fileChangeEvent(fileInput: any){
-   debugger
-        this.items = fileInput.target.files; 
-        console.log(this.items);   
-     }
 
 
 
@@ -88,7 +137,9 @@ debugger
 }
    
   public fileOverBase(e:any):void {
+  
     this.hasBaseDropZoneOver = e;
+  
     }
   
  openfileDialog() {

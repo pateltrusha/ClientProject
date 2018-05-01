@@ -1,4 +1,4 @@
-<!-- <ng-template #template>
+<ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -8,7 +8,7 @@
   <div class="modal-body">
     <img src="//placehold.it/1000x600" class="img-responsive">
   </div>
-</ng-template> -->
+</ng-template>
 
 <!-- <ng-template #template_NF>
   <div class="modal-header">
@@ -24,7 +24,7 @@
   </div>
 </ng-template> -->
 
-<!-- <div class="toolbar_container">
+<div class="toolbar_container">
 
                 <button type="button" class="btn_secondary">
                     <i class="fa fa-times icon"></i>Delete</button>
@@ -44,12 +44,39 @@
                     <i class="fa fa-flag icon"></i>Abuses</button>
                 <button type="button" class="btn_secondary">
                     <i class="fa fa-folder-open icon"></i>Create Folder</button>
-                <input type="file" id="fileLoader" name="files" #file ng2FileSelect [uploader]="uploader">
+                 <input type="file" id="fileLoader" name="files" #file ng2FileSelect [uploader]="uploader" (change)="fileChangeEvent($event)" >
                 <button id="btnOpenFileDialog" (click)="file.click()" class="btn_primary">
                     <i class="fa fa-cloud-upload icon"></i>Upload</button>
-</div> -->
+</div> 
 
- <form class="login-form signinform" name="form" (ngSubmit)="uploadFile()" #f="ngForm" novalidate>
+
+<h3>Uploded files</h3>
+<div class="grid_container">
+     <div class="row">    
+         <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="50%">Name</th>
+                        <th>Size</th>
+                        <th>Uploaded Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let file of _files" [contextMenu]="componentMenu" [contextMenuSubject]="item">
+                        <td (execute)="openModal(template)" *ngIf="!hideVal" ><strong>{{ file.name }}</strong></td>
+                       
+                        <td nowrap>{{ file.size/1024/1024|number:'.2'}} MB</td>
+                        <td nowrap contenteditable='true'>{{file.create_time|date}}</td>
+      
+                   </tr>
+               </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+<!--  <form class="login-form signinform" name="form" (ngSubmit)="uploadFile()" #f="ngForm" novalidate>
         <div class="form-group">
             <label class="control-label col-sm-4" for="myimage">File Upload</label>
             <div class="col-sm-7">
@@ -59,7 +86,7 @@
         <div class="form-group">        
           <button class="btn col s12 primary-btn login-btn">Upload</button>
         </div>
-  </form>
+  </form> -->
 
     <div class="grid_container">
      <div class="row">    
@@ -70,8 +97,6 @@
                         <th width="50%">Name</th>
                         <th>Size</th>
                         <th>Date</th>
-                        <th>Uploaded</th>
-                        <th>Processed</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -82,19 +107,11 @@
                         <td *ngIf="hideVal" > <input type="text" [value]="item.name"></td>
                         <td nowrap>{{ item.size/1024/1024|number:'.2'}} MB</td>
                         <td nowrap contenteditable='true'>{{item.lastModifiedDate|date}}</td>
-                        <td class="text-center">
-                            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                           <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                        </td>
-
-                         <td class="text-center">
-                            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                           <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                        </td>
+      
 
                         <td nowrap>
                             <button type="button" class="btn btn-success btn-xs"
-                              (click)="uploadFile(item)" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                              (click)="uploadFile()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
                                 <span class="glyphicon glyphicon-upload"></span> Upload
                             </button>
                             <button type="button" class="btn btn-danger btn-xs"
@@ -131,7 +148,8 @@
       </context-menu>
             
         </div>
-
+        <br/><br/><br/>
+ <br/><br/><br/>
                 <div class="draganddrop_container">
                     <div class="dragdroptextcontainer">
                         <div class="draganddrop_text_container">
@@ -139,6 +157,7 @@
                             <i class="fa fa-cloud-upload dragdrop_icon" ng2FileDrop
                       [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
                       (fileOver)="fileOverBase($event)"
+                      (onFileDrop)="dropped($event)"
                       [uploader]="uploader"></i>
                             <label class="draganddrop_text">Drag and Drop Here</label> 
                         </div>

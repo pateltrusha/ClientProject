@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
 
   //create new folder
   createFolder(f_name){
-
+debugger
     const file_name={
       "name":f_name
     }
