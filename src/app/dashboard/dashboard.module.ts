@@ -12,7 +12,8 @@ import { FileSelectDirective, FileDropDirective,FileUploader } from 'ng2-file-up
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { CollectionService } from '../shared/services/index.service';
 import { ContextMenuModule } from 'ngx-contextmenu/lib/index';
-import { FoldersComponent } from './folders/folders.component'
+import { FoldersComponent } from './folders/folders.component';
+
 //import { ContextMenuModule } from '../../lib/index';
 @NgModule({
   imports: [

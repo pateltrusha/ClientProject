@@ -1,28 +1,55 @@
-<ng-template #template>
+ <!--  preview modal -->
+<ng-template #template_preview>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefPrev.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <img src="//placehold.it/1000x600" class="img-responsive">
   </div>
+  <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modalRefPrev.hide()">Cancel</button>
+  </div>
 </ng-template>
-
-<!-- <ng-template #template_NF>
+ 
+<!--  rename modal -->
+<ng-template #template_rename>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">New Folder</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <h4 class="modal-title pull-left">Rename File</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefRename.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <input type="text" placeholder="Folder Name"><br>
-    <button> Create </button> 
-    <button (click)="modalRef.hide()"> Cancel</button>
+      <div class="row">
+            <div class="form-group">
+                <input class="form-control input-md-3" type="text" [(ngModel)]="f_name"/>
+            </div>
+        </div>
   </div>
-</ng-template> -->
+  <div  class="modal-footer">
+        <button class="btn btn-info" (click)="renameFile(f_name)"> Rename </button> 
+        <button class="btn btn-danger" (click)="modalRefRename.hide()"> Cancel</button>
+  </div>
+</ng-template>
+
+<ng-template #template_remove>
+  <div class="modal-header">
+      <h4 class="modal-title pull-left">Are you sure?</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefRemove.hide()">
+        <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+    <p>Do you really want to delete these records? This process cannot be undone.</p>
+  </div>
+  <div class="modal-footer">
+        <button type="button" class="btn btn-info" (click)="modalRefRemove.hide()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="removeFile(r_file)">Delete</button>
+  </div>
+</ng-template>
 
 <div class="toolbar_container">
 
@@ -49,7 +76,6 @@
                     <i class="fa fa-cloud-upload icon"></i>Upload</button>
 </div> 
 
-
 <h3>Uploded files</h3>
 <div class="grid_container">
      <div class="row">    
@@ -57,36 +83,44 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th width="50%">Name</th>
+                        <th width="50%">Name</th>                        
                         <th>Size</th>
                         <th>Uploaded Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr *ngFor="let file of _files" [contextMenu]="componentMenu" [contextMenuSubject]="item">
-                        <td (execute)="openModal(template)" *ngIf="!hideVal" ><strong>{{ file.name }}</strong></td>
-                       
+                        <td (execute)="previewModal(template_preview)" *ngIf="!hideVal" ><strong>{{ file.name }}{{file.extension}}</strong></td>
                         <td nowrap>{{ file.size/1024/1024|number:'.2'}} MB</td>
                         <td nowrap contenteditable='true'>{{file.create_time|date}}</td>
-      
+                        <td><button (click)="renameModal(template_rename,file)">Rename</button></td>
+                        <td><button (click)="removeModal(template_remove,file)"> Remove</button></td>
+          <context-menu #componentMenu>
+            <ng-template contextMenuItem (execute)="previewModal(template_preview)">
+              Preview
+            </ng-template>
+          
+            <ng-template contextMenuItem let-item (execute)="renameModal(template_rename,file)">
+            Rename
+            </ng-template>
+       
+         <!--     <ng-template contextMenuItem let-item (execute)="file.click()">
+            Upload File
+            </ng-template> -->
+        
+            <ng-template contextMenuItem let-item (execute)="removeModal(template_remove,file)">
+            Remove File
+            </ng-template>
+      </context-menu>
                    </tr>
                </tbody>
             </table>
+                
             </div>
           </div>
         </div>
-<!--  <form class="login-form signinform" name="form" (ngSubmit)="uploadFile()" #f="ngForm" novalidate>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="myimage">File Upload</label>
-            <div class="col-sm-7">
-                    <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." />                         
-            </div>
-        </div>
-        <div class="form-group">        
-          <button class="btn col s12 primary-btn login-btn">Upload</button>
-        </div>
-  </form> -->
 
     <div class="grid_container">
      <div class="row">    
@@ -102,8 +136,8 @@
                 </thead>
 
                 <tbody>
-                    <tr *ngFor="let item of items" [contextMenu]="componentMenu" [contextMenuSubject]="item">
-                        <td (execute)="openModal(template)" *ngIf="!hideVal" ><strong>{{ item.name }}</strong></td>
+                    <tr *ngFor="let item of items; let i = index">
+                        <td *ngIf="!hideVal" ><strong>{{ item.name }}</strong></td>
                         <td *ngIf="hideVal" > <input type="text" [value]="item.name"></td>
                         <td nowrap>{{ item.size/1024/1024|number:'.2'}} MB</td>
                         <td nowrap contenteditable='true'>{{item.lastModifiedDate|date}}</td>
@@ -115,7 +149,7 @@
                                 <span class="glyphicon glyphicon-upload"></span> Upload
                             </button>
                             <button type="button" class="btn btn-danger btn-xs"
-                              (click)="item.remove()">
+                              (click)="remove(i)">
                                 <span class="glyphicon glyphicon-trash"></span> Remove
                             </button>
                         </td>
@@ -123,29 +157,7 @@
                </tbody>
             </table>
 
-      <context-menu #componentMenu>
-            <ng-template contextMenuItem (execute)="openModal(template)">
-              Preview
-            </ng-template>
-          
-            <ng-template contextMenuItem let-item (execute)="showText()">
-            Rename
-            </ng-template>
-             <ng-template contextMenuItem let-item (execute)="showText()">
-             Move To
-            </ng-template>
-       
-             <ng-template contextMenuItem let-item (execute)="file.click()">
-            Upload File
-            </ng-template>
-            <ng-template contextMenuItem let-item (execute)="openModal(template_NF)">
-            New Collection
-            </ng-template>
-
-            <ng-template contextMenuItem let-item (execute)="showText()">
-            Remove File
-            </ng-template>
-      </context-menu>
+ 
             
         </div>
         <br/><br/><br/>

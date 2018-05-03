@@ -4,13 +4,9 @@
 <!-- <button (click)="showFiles()">click</button> -->
 <ul *ngFor="let c of collections">
 	<li>
-		<a [routerLink]="['collections']" [queryParams]="{ id: c.id}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{c.name}}</a>
+		<a [routerLink]="['folders']" [queryParams]="{ id: c.id}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{c.name}}</a>
 	</li>
 
 	<li>{{c.id}}</li>
 </ul>
 
-   <!--  <ul >
-      <li><a (click)="showFiles()"><i class="fas fa-folder" style="font-size:48px;"></i>{{c.name}}
-      </li></a>
-    </ul> -->

@@ -12,7 +12,7 @@ export const dashroutes: Routes = [
 	{ path: 'dashboard',component: DashboardComponent, canActivateChild: [AuthGuard],
         children: [ 
            { path: '',component: FoldersComponent},
-	       { path: 'collections',component: CollectionsComponent},
+           {path: 'folders',component: CollectionsComponent},
 	       { path: 'analysis', component: AnalysisComponent},
 	       { path: 'result', component: ResultsComponent },
 	       { path:'updateprofile', component: UpdateprofileComponent }

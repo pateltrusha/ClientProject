@@ -11,14 +11,15 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+_route:any=[];
  
   constructor(private authService: AuthService,
               private modalService: BsModalService,
               private collService:CollectionService,
               private router: Router,
               private toastrService: ToastrService) {
-             
+    this.router = router;
+            console.log(this.router.url); //  /routename 
     }
    collections:any;
   ngOnInit() {

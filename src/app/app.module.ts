@@ -13,7 +13,6 @@ import { ToastrModule,ToastContainerModule } from 'ngx-toastr';
 import { ConfigService } from './shared/configuration/config.service';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
-
 @NgModule({
   declarations: [
     AppComponent

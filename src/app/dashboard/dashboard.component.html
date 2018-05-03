@@ -47,19 +47,21 @@
         <i class="fa fa-map-marker"></i>
         <ul class="bread_crumb">
           <li>
-            <a href="#">Home</a>
+            <a href="dashboard">{{router.url}}</a>
           </li>
-          <li>
-            <a href="#">Collection</a>
-          </li>
-          <li>
-            <a></a>
-          </li>
+          
         </ul>
       </div>
+
+
+
       <div class="search_container">
         <input type="text" placeholder="Search" />
         <i class="fa fa-search"></i>
+      </div><br><br/>
+       <div>
+        <span style="margin-left: 8px">{{path || 'Files'}}</span>
+  <span class="spacer"></span>
       </div>
     </div>
     <div class="pull-right">
@@ -87,8 +89,6 @@
     </div>
   </nav>
   <div class="main_contentarea">
-   
-
 
     <router-outlet></router-outlet> 
 
