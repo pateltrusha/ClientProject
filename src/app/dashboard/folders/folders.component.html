@@ -1,12 +1,55 @@
-<p>
-  folders works!
-</p>
-<!-- <button (click)="showFiles()">click</button> -->
-<ul *ngFor="let c of collections">
-	<li>
-		<a [routerLink]="['folders']" [queryParams]="{ id: c.id}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{c.name}}</a>
-	</li>
+<!--  rename modal -->
+<ng-template #template_rename>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Rename Folder</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefRename.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+            <div class="form-group">
+              
+                <input class="form-control input-md-3" type="text" [ngModel]="cur_name" #model (change)="changeEvent(model.value)"/>
+            </div>
+        </div>
+  </div>
+  <div  class="modal-footer">
+        <button class="btn btn-info" (click)="renameFolder(_folder)"> Rename </button> 
+        <button class="btn btn-danger" (click)="modalRefRename.hide()"> Cancel</button>
+  </div>
+</ng-template>
 
-	<li>{{c.id}}</li>
+<ng-template #template_remove>
+  <div class="modal-header">
+      <h4 class="modal-title pull-left">Are you sure?</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefRemove.hide()">
+        <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+    <p>Do you really want to delete these records? This process cannot be undone.</p>
+  </div>
+  <div class="modal-footer">
+        <button type="button" class="btn btn-info" (click)="modalRefRemove.hide()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="removeFolder(_folder)">Delete</button>
+  </div>
+</ng-template>
+<!-- <button (click)="showFiles()">click</button> -->
+<ul *ngFor="let folder of folders" [contextMenu]="componentMenu" [contextMenuSubject]="item">
+	<li>
+		<a [routerLink]="['folders']" [queryParams]="{ id: folder.id}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{folder.name}}</a>
+	</li>
+	 <context-menu #componentMenu>
+          
+            <ng-template contextMenuItem let-item (execute)="renameModal(template_rename,folder)">
+            Rename
+            </ng-template>
+        
+            <ng-template contextMenuItem let-item (execute)="removeModal(template_remove,folder)">
+            Remove File
+            </ng-template>
+      </context-menu>
+
 </ul>
 

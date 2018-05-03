@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
-import { AuthService,CollectionService } from '../shared/services/index.service';
+import { AuthService,CollectionService,FolderService } from '../shared/services/index.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -16,6 +16,7 @@ _route:any=[];
   constructor(private authService: AuthService,
               private modalService: BsModalService,
               private collService:CollectionService,
+              private  folderService:FolderService,
               private router: Router,
               private toastrService: ToastrService) {
     this.router = router;
@@ -32,7 +33,7 @@ debugger
     const file_name={
       "name":f_name
     }
-      this.collService.createFolder(file_name)
+      this.folderService.createFolder(file_name)
       .subscribe(
                           data => {
                            console.log(data);
