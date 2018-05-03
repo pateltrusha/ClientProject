@@ -25,12 +25,13 @@
   <div class="modal-body">
       <div class="row">
             <div class="form-group">
-                <input class="form-control input-md-3" type="text" [(ngModel)]="f_name"/>
+              
+                <input class="form-control input-md-3" type="text" [ngModel]="cur_name" #model (change)="changeEvent(model.value)"/>
             </div>
         </div>
   </div>
   <div  class="modal-footer">
-        <button class="btn btn-info" (click)="renameFile(f_name)"> Rename </button> 
+        <button class="btn btn-info" (click)="renameFile(r_file)"> Rename </button> 
         <button class="btn btn-danger" (click)="modalRefRename.hide()"> Cancel</button>
   </div>
 </ng-template>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { ConfigService } from '../configuration/config.service';
 import 'rxjs/Rx';
+import 'rxjs/add/operator/map'
 
 @Injectable()
 export class CollectionService {
@@ -16,69 +17,13 @@ export class CollectionService {
     this.baseUrl = configService.getApiURI();
   }
 
-   
-     //get all folders
-    getFolders(){
-    	console.log(this.token);
-    	debugger
-    		let headers: Headers = new Headers();
-   			headers.append('Content-Type', 'application/json');
-    		headers.append('Authorization', this.token);
-  			let options = new RequestOptions({ headers: headers });
-
-    return this.http.get(this.baseUrl + "/collection",options)
-         .map(res =>res.json())
-         .do(res=>console.log("Folder COllection",res))
-         .catch(err => this.handleError(err));
-    }
-
+ 
+//error handling
      private handleError (error: Response) {
-     	console.log(error.json());
+       debugger
+       console.log(error.json());
       return Observable.throw(error.json().error);
-    }
-
-     //create new folder
-     createFolder(folder){
-      
-        let body = JSON.stringify(folder);
-      let headers: Headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          headers.append('Authorization', this.token);
-      let options = new RequestOptions({ headers: headers });
-         
-          return this.http.post(this.baseUrl + "/collection/new_folder", body, options)
-               .map(res =>res.json() )
-               .catch(err => this.handleError(err));
-     }
-
-
-    //rename 
-    renameFolder(folder){
-    
-      let body = JSON.stringify(folder);
-      let headers: Headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          headers.append('Authorization', this.token);
-      let options = new RequestOptions({ headers: headers });
-          
-          return this.http.post(this.baseUrl + "/collection/rename_folder", body, options)
-               .map(res =>res.json() )
-               .catch(err => this.handleError(err));
-    }
-    
-    //remove folder
-     removeFolder(folder){
-      let body = JSON.stringify(folder);
-      let headers: Headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          headers.append('Authorization', this.token);
-      let options = new RequestOptions({ headers: headers });
-          console.log(folder);
-          return this.http.post(this.baseUrl + "/collection/remove_folder", body, options)
-               .map(res =>res.json() )
-               .catch(err => this.handleError(err));
-    }
-
+    } 
 
     //get all files
     getAllfiles(c_id){
@@ -111,12 +56,12 @@ export class CollectionService {
                   headers.append('Content-Type', 'application/json');
                   headers.append('Authorization', this.token);
         let options = new RequestOptions({ headers: headers });
-             console.log("FIle",file);
-             console.log("BODY",body)
-             return this.http.post(this.baseUrl + "/collection/remove_file",file, options)
-                       .map(res =>res.json())
-                       .catch(err => this.handleError(err));
+             
+             return this.http.post(this.baseUrl + "/collection/remove_file",body, options)
+                     .map(res=>res.json())
+                     .catch(err =>this.handleError(err));
      }
+
 
 
      //upload multiple files

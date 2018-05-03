@@ -18,20 +18,19 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./collections.component.css']
 })
 export class CollectionsComponent implements OnInit {
-     closeResult: string;
+   
     _file:any;
     _files:any=[];
-     template:any;
-     hideVal:boolean=false
      token=localStorage.getItem('auth_token');
      baseUrl: string ='http://localhost:3010/collection/new_file';
   // public uploader:FileUploader = new FileUploader({url:'https://evening-anchorage-3159.herokuapp.com/api/'});
       public hasBaseDropZoneOver:boolean = false;
-     param1:any;
-   items:any=[];
+      param1:any;
+      items:any=[];
      _items = new Array();
      _f:any;
-     f_name:string;
+     cur_name:string;
+     new_name:string
   
   public uploader:FileUploader = new FileUploader({url:this.baseUrl})
 
@@ -44,13 +43,15 @@ export class CollectionsComponent implements OnInit {
     private toastrService: ToastrService) {
     // this.baseUrl = configService.getApiURI();
     this.param1=this.activatedRoute.snapshot.queryParams["id"];
-    this.getFiles();
-
+   
+   
    }
 
   ngOnInit() { 
-  
+     this.getFiles();
   }
+
+  //choose file from  dialouge 
  fileChangeEvent(fileInput: any){
    debugger
         this.items=fileInput.target.files; 
@@ -60,36 +61,30 @@ export class CollectionsComponent implements OnInit {
 // file dropping
  dropped(fileInput: any){
     debugger
-    alert("working");
-    this._f = fileInput.target.files; 
-     this.items.push(this._f);
+    this.items= fileInput; 
   }
-
-
 
   //listing all files
   getFiles(){
+
     const file_data={
        "u_cID":this.param1
      }
-
+     //service call to get all files
      this.collService.getAllfiles(file_data)
      .subscribe(
                  data => {
                       console.log(data);
                       this._files=data;
                         },
-                 error => {  
+                 error => { 
+                 this.toastrService.error("error while fetching files"); 
                         });
-     } 
+      } 
      
      //upload new files
-   uploadFile(){
-     debugger
-    const file_data={
-       
-       "u_cID":this.param1
-    }
+   uploadFile()
+   {
     const fileEvent: FileList = this.items;
     const file: File = fileEvent[0];
     console.log(file);
@@ -114,14 +109,9 @@ export class CollectionsComponent implements OnInit {
                         this.getFiles();
                         },
                     error => {
-
+                          this.toastrService.error("Error while uploading file");
                         });
-  }
-
-  //rename file
-  renameFile(new_fname){
-
-  }
+           }
 
 
   //remove from uploading list
@@ -130,16 +120,13 @@ export class CollectionsComponent implements OnInit {
    this.items=[];
   }
 
-  showText(){
   
-  this.hideVal=true;
-}
-   
   public fileOverBase(e:any):void {
   
     this.hasBaseDropZoneOver = e;
   
     }
+
   //will open file dialog when click on upload button
  openfileDialog() {
    debugger
@@ -147,38 +134,62 @@ export class CollectionsComponent implements OnInit {
   }
 
   //open modal pop up for preview
-  modalRefPrev: BsModalRef;
+   modalRefPrev: BsModalRef;
    previewModal(t,data) {
-     debugger;
-    this.modalRefPrev = this.modalService.show(t,data);
-
-  }
+          this.modalRefPrev = this.modalService.show(t,data);
+    }
  
    //open modal popup for rename file
     modalRefRename: BsModalRef;
-  renameModal(t,file) {
-     debugger;
+    renameModal(t,file) {
 
-    this.modalRefRename = this.modalService.show(t);
-    this.modalService.onShow.subscribe(
-      this.f_name=file.name+file.extension)
+          this.modalRefRename = this.modalService.show(t);
+          this.cur_name=file.name+file.extension
+          this.r_file=file;
     // this.modalService.onHide.subscribe((reason: string) =>{
     //       this.setMsg=this.msg;
     // });
-  }
+     }
+  // for fetching new value
+   changeEvent(newValue) {
+      this.new_name=newValue
+     console.log(newValue, this.cur_name);
+     }
 
-  c_id:any;
-  d_id:any
+ //rename file
+  renameFile(file){
+    debugger
+     const fileData={
+        "cur_name":this.cur_name,
+        "new_name":this.new_name,
+        "u_cID":file.collection_id,
+        "u_dID":file.id
+        }
+
+ this.modalRefRename.hide();
+        this.collService.renameFile(fileData)
+             .subscribe(
+                   data => {
+                        console.log(data);
+                          this.toastrService.success('File Renamed Successfully !');
+                           this.getFiles();
+                        },
+                    error => {
+                      this.toastrService.error("Error while renaming file");
+                        });
+      }
+
+  
   r_file:any;
   //open modal popup for remove file
    modalRefRemove: BsModalRef;
   removeModal(t,file){
-    debugger;
-    console.log(file);
      this.modalRefRemove = this.modalService.show(t);
-    this.modalService.onHide.subscribe(
-      this.r_file=file
-)
+
+     this.r_file=file;
+//     this.modalService.onHide.subscribe(
+//       this.r_file=file
+// )
   }
 
   //remove file
@@ -186,25 +197,20 @@ export class CollectionsComponent implements OnInit {
        debugger
        this.modalRefRemove.hide();
         const fileData={
-       "u_cID":file.collection_id,
-       "u_dID":file.id
-    }  
+             "u_cID":file.collection_id,
+             "u_dID":file.id
+           }  
 
     this.collService.removeFile(fileData)
-     .subscribe(
+          .subscribe(
                    data => {
                         console.log(data);
-                         // this.getFiles();
-                       // this.toastrService.success('File Deleted Successfully !');
-                       
+                          this.toastrService.success('File Deleted Successfully !');
+                           this.getFiles();
                         },
                     error => {
-
+                        this.toastrService.error("Error while removing file");
                         });
-     
-     debugger
-    
-     //  this.getFiles();
  
      }
 

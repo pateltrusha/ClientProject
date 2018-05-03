@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CollectionService } from '../../shared/services/index.service';
+import {CollectionService,FolderService } from '../../shared/services/index.service';
 import { Router } from '@angular/router';
 import{ CollectionsComponent} from '../collections/collections.component'
 @Component({
@@ -9,7 +9,9 @@ import{ CollectionsComponent} from '../collections/collections.component'
 })
 export class FoldersComponent implements OnInit {
 
-  constructor( private collService:CollectionService, private router: Router) { 
+  constructor( private collService:CollectionService,
+               private  folderService:FolderService,
+               private router: Router) { 
   	this.GetFolders()}
 
   ngOnInit() {
@@ -19,7 +21,7 @@ export class FoldersComponent implements OnInit {
     //get all collections
   GetFolders(){
   	debugger
-      this.collService.getFolders()
+      this.folderService.getFolders()
          .subscribe(
            data=>{
              this.collections=data.collections;
