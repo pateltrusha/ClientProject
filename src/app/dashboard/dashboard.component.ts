@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
   encapsulation: ViewEncapsulation.None,
@@ -18,7 +19,9 @@ _route:any=[];
               private collService:CollectionService,
               private  folderService:FolderService,
               private router: Router,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private location: Location) {
+
     this.router = router;
             console.log(this.router.url); //  /routename 
     }
@@ -38,9 +41,11 @@ debugger
       .subscribe(
                           data => {
                            console.log(data);
-                                this.toastrService.success('Folder created Successfully!');
-
-                                   this.router.navigate(['/dashboard']);
+                               this.router.navigated = false;
+                               this.router.navigate([this.router.url]);
+                            //this.pageRefresh();
+                           
+                            this.toastrService.success('Folder created Successfully!');   
                                  },
                           error => {
                              this.toastrService.error('Error while updating!');
@@ -49,7 +54,10 @@ debugger
 
   }
 
-   
+//  pageRefresh() {
+//    debugger
+//    location.reload();
+// }
     ///modal pop up
    modalRef: BsModalRef;
    createModal(t) {

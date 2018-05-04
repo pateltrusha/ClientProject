@@ -31,8 +31,9 @@
     <p>Do you really want to delete these Folder? This process cannot be undone.</p>
   </div>
   <div class="modal-footer">
+     <button type="button" class="btn btn-danger" (click)="removeFolder(_folder)">Delete</button>
         <button type="button" class="btn btn-info" (click)="modalRefRemove.hide()">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="removeFolder(_folder)">Delete</button>
+       
   </div>
 </ng-template>
 <!-- <button (click)="showFiles()">click</button> -->
@@ -43,11 +44,11 @@
 	 <context-menu #componentMenu>
           
             <ng-template contextMenuItem let-item (execute)="renameModal(template_rename,folder)">
-            Rename
+            Rename Folder
             </ng-template>
         
             <ng-template contextMenuItem let-item (execute)="removeModal(template_remove,folder)">
-            Remove File
+            Remove Folder
             </ng-template>
       </context-menu>
 

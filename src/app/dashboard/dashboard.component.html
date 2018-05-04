@@ -9,10 +9,19 @@
     </button>
   </div>
   <div class="modal-body">
-    <input type="text" placeholder="Folder Name" [(ngModel)]="f_name"><br>
-    <button (click)="createFolder(f_name)"> Create </button> 
-    <button (click)="modalRef.hide()"> Cancel</button>
+         <div class="row">
+            <div class="form-group">
+              
+                <input class="form-control input-md-3" placeholder="Folder Name"
+                 type="text" [(ngModel)]="f_name" />
+            </div>
+        </div>
+ </div>
+    <div  class="modal-footer">
+        <button  class="btn btn-info" (click)="createFolder(f_name)"> Create </button> 
+        <button class="btn btn-danger" (click)="modalRef.hide()"> Cancel</button>
   </div>
+
 </ng-template>
 
 
