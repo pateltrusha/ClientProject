@@ -14,7 +14,7 @@ import { ToastrService,ToastContainerDirective } from 'ngx-toastr';
 })
 
 export class FoldersComponent implements OnInit {
-
+currentPath: string='Home';
   constructor( private collService:CollectionService,
                private  folderService:FolderService,
                private router: Router,
@@ -32,7 +32,7 @@ export class FoldersComponent implements OnInit {
   _folder:any;
     //get all collections
   getFolders(){
-  	debugger
+
       this.folderService.getFolders()
          .subscribe(
            data=>{
@@ -101,6 +101,24 @@ export class FoldersComponent implements OnInit {
            );
 
     }
+     
+
+    moveToCollection(folder){
+      debugger
+        this.currentPath = this.pushToPath(this.currentPath, folder.name);
+        debugger
+        console.log(this.currentPath)
+       this.router.navigated = false;
+        this.router.navigate([this.router.url+'/folders/'],{queryParams:{id:folder.id}});
+      // this.router.navigate(['/folders'],{queryParams:{id:folder.id}});
+    }
+
+    pushToPath(path: string, folderName: string) {
+     debugger
+    let p = path ? path : '';
+    p += `/${folderName}/`;
+    return p;
+  }
 
             
 

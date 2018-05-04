@@ -49,6 +49,7 @@
     </li>
   </ul>
 </div>
+
 <div class="main-container">
   <nav class="header" style="z-index:1!important">
     <div class="pull-left">
@@ -99,6 +100,11 @@
     </div>
   </nav>
   <div class="main_contentarea">
+
+    <h3> Custom Path</h3>
+    <a><span class="glyphicon glyphicon-arrow-left fa-2x"></span></a>
+    <a><span style="margin-left: 8px">{{path || 'Home/'}}</span></a>
+    <a> <span class="spacer"></span></a>
      <div toastContainer style="float: right;"></div><br/><br/>
     <router-outlet></router-outlet> 
 

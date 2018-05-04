@@ -39,7 +39,9 @@
 <!-- <button (click)="showFiles()">click</button> -->
 <ul *ngFor="let folder of folders" [contextMenu]="componentMenu" [contextMenuSubject]="item">
 	<li>
-		<a [routerLink]="['folders']" [queryParams]="{ id: folder.id}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{folder.name}}</a>
+
+		<!-- <a (click)="moveToCollection(folder)"  [routerLink]="['folders']" [queryParams]="{ id: folder.id}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{folder.name}}</a> -->
+    <a (click)="moveToCollection(folder)"> <i class="fas fa-folder" style="font-size:48px;"></i>{{folder.name}}</a>
 	</li>
 	 <context-menu #componentMenu>
           

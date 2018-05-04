@@ -18,20 +18,22 @@ import { ToastrService ,ToastContainerDirective} from 'ngx-toastr';
     styleUrls: ['./collections.component.css']
 })
 export class CollectionsComponent implements OnInit {
-   
-    _file:any;
+    token:string;
+    uploadedFiles:any=[];
     _files:any=[];
-     token=localStorage.getItem('auth_token');
-     baseUrl: string ='http://localhost:3010/collection/new_file';
-  // public uploader:FileUploader = new FileUploader({url:'https://evening-anchorage-3159.herokuapp.com/api/'});
-      public hasBaseDropZoneOver:boolean = false;
-      param1:any;
+    _file:any;
+    c_id:any;
+    fileData:any;
+    cur_name:string;
+    new_name:string
+    baseUrl: string ='http://localhost:3010/collection/new_file';
+    public hasBaseDropZoneOver:boolean = false;
+    
      items:any=[];
      _items = new Array();
      _f:any;
-     cur_name:string;
-     new_name:string
-  
+     
+    
   public uploader:FileUploader = new FileUploader({url:this.baseUrl})
   @ViewChild(ToastContainerDirective) toastContainer: ToastContainerDirective;
 
@@ -41,59 +43,53 @@ export class CollectionsComponent implements OnInit {
     private configService:ConfigService,  
     private collService:CollectionService,
     private toastrService: ToastrService) {
+
     // this.baseUrl = configService.getApiURI();
-    this.param1=this.activatedRoute.snapshot.queryParams["id"];
-   
+   this.token=localStorage.getItem('auth_token');
+   this.c_id=this.activatedRoute.snapshot.queryParams["id"];
+   // this.c_id=this.activatedRoute.snapshot.paramMap.get('id');
    
    }
 
   ngOnInit() { 
-
       this.toastrService.overlayContainer = this.toastContainer;
-     this.getFiles();
-  }
+      this.getFiles();
+      }
 //items: Array<File> = [];
-  //choose file from  dialouge 
- fileChangeEvent(fileInput: any){
-   debugger
 
-     this.items.push(fileInput.target.files[0]); 
-       
-        
-        console.log(this.items);   
+  //choose file from  dialouge 
+ fileSelect(fileInput: any){
+        this._files.push(fileInput.target.files[0]); 
+        console.log(this._files);  
      }
 
 // file dropping
  dropped(fileInput: any){
-    debugger
-    console.log("WITH DRAG....",fileInput)
-     console.log(this.items); 
-     this.items.push(fileInput[0]);
-      console.log(this.items);  
-  }
-
+     this._files.push(fileInput[0]);  
+}
   //listing all files
-  getFiles(){
-
+  getFiles()
+  {
     const file_data={
-       "u_cID":this.param1
+       "u_cID":this.c_id
      }
      //service call to get all files
      this.collService.getAllfiles(file_data)
      .subscribe(
                  data => {
                       console.log(data);
-                      this._files=data;
+                      this.uploadedFiles=data;
                         },
                  error => { 
                  this.toastrService.error("error while fetching files"); 
-                        });
-      } 
+              });
+   } 
      
      //upload new files
-   uploadFile()
+   uploadFile(i)
    {
-    const fileEvent: FileList = this.items;
+     debugger
+    const fileEvent: FileList = this._files;
     const file: File = fileEvent[0];
     console.log(file);
 
@@ -105,7 +101,7 @@ export class CollectionsComponent implements OnInit {
     // }
     // console.log(payload)
    
-    formData.append('u_cID', this.param1);
+    formData.append('u_cID', this.c_id);
     formData.append('file', file);
      //service call to upload file
      this.collService.uploadFile(formData)
@@ -113,19 +109,20 @@ export class CollectionsComponent implements OnInit {
                    data => {
                         console.log(data);
                         this.toastrService.success('File Uploaded Successfully !');
-                         this.items=[];
                         this.getFiles();
+                       
                         },
                     error => {
                           this.toastrService.error("Error while uploading file");
                         });
+      this.remove(i);
            }
 
 
   //remove from uploading list
   remove(i){  
-    debugger
-   this.items.splice(i, 1);  }
+
+   this._files.splice(i, 1);  }
 
   
   public fileOverBase(e:any):void {
@@ -152,7 +149,7 @@ export class CollectionsComponent implements OnInit {
 
           this.modalRefRename = this.modalService.show(t);
           this.cur_name=file.name+file.extension
-          this.r_file=file;
+          this.fileData=file;
     // this.modalService.onHide.subscribe((reason: string) =>{
     //       this.setMsg=this.msg;
     // });
@@ -186,14 +183,13 @@ export class CollectionsComponent implements OnInit {
                         });
       }
 
-  
-  r_file:any;
+ 
   //open modal popup for remove file
    modalRefRemove: BsModalRef;
   removeModal(t,file){
      this.modalRefRemove = this.modalService.show(t);
 
-     this.r_file=file;
+     this.fileData=file;
 //     this.modalService.onHide.subscribe(
 //       this.r_file=file
 // )
