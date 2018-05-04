@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700" rel="stylesheet">
-<ng-template #template>
+
+<ng-template #template_folder>
   <div class="modal-header">
     <h4 class="modal-title pull-left">New Folder</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -42,7 +43,7 @@
 <div class="main-container">
   <nav class="header" style="z-index:1!important">
     <div class="pull-left">
-      <button type="button" class="btn_primary btn_curve" (click)="openModal(template)">New Collection</button>
+      <button type="button" class="btn_primary btn_curve" (click)="createModal(template_folder)">New Collection</button>
       <div class="bread_crumbs_container">
         <i class="fa fa-map-marker"></i>
         <ul class="bread_crumb">
@@ -89,7 +90,7 @@
     </div>
   </nav>
   <div class="main_contentarea">
-
+     <div toastContainer style="float: right;"></div><br/><br/>
     <router-outlet></router-outlet> 
 
 

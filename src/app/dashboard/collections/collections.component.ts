@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewEncapsulation,Input } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation,Input,ViewChild } from '@angular/core';
 import { Router,Params,ActivatedRoute  } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 
@@ -9,7 +9,7 @@ import { ConfigService } from '../../shared/configuration/config.service';
 import { ContextMenuService, ContextMenuComponent } from 'ngx-contextmenu/lib/index'
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService ,ToastContainerDirective} from 'ngx-toastr';
 
 @Component({
     selector: 'app-collections',
@@ -33,7 +33,7 @@ export class CollectionsComponent implements OnInit {
      new_name:string
   
   public uploader:FileUploader = new FileUploader({url:this.baseUrl})
-
+  @ViewChild(ToastContainerDirective) toastContainer: ToastContainerDirective;
 
   constructor(private modalService: BsModalService,
     private router: Router,
@@ -43,11 +43,14 @@ export class CollectionsComponent implements OnInit {
     private toastrService: ToastrService) {
     // this.baseUrl = configService.getApiURI();
     this.param1=this.activatedRoute.snapshot.queryParams["id"];
-   
+   debugger
+   console.log(this.uploader);
    
    }
 
   ngOnInit() { 
+
+      this.toastrService.overlayContainer = this.toastContainer;
      this.getFiles();
   }
 

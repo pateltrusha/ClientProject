@@ -33,11 +33,13 @@ debugger
     const file_name={
       "name":f_name
     }
+    this.modalRef.hide();
       this.folderService.createFolder(file_name)
       .subscribe(
                           data => {
                            console.log(data);
-                                this.toastrService.success('Successfully updated !');
+                                this.toastrService.success('Folder created Successfully!');
+
                                    this.router.navigate(['/dashboard']);
                                  },
                           error => {
@@ -50,7 +52,7 @@ debugger
    
     ///modal pop up
    modalRef: BsModalRef;
-   openModal(t) {
+   createModal(t) {
    
     this.modalRef = this.modalService.show(t);
   }
