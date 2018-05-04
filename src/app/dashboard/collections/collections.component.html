@@ -72,7 +72,7 @@
                     <i class="fa fa-flag icon"></i>Abuses</button>
                 <button type="button" class="btn_secondary">
                     <i class="fa fa-folder-open icon"></i>Create Folder</button>
-                 <input type="file" id="fileLoader" name="files" #file ng2FileSelect [uploader]="uploader" (change)="fileChangeEvent($event)" >
+                 <input type="file" id="fileLoader" name="files" #file ng2FileSelect [uploader]="uploader"  (change)="fileChangeEvent($event)" multiple>
                 <button id="btnOpenFileDialog" (click)="file.click()" class="btn_primary">
                     <i class="fa fa-cloud-upload icon"></i>Upload</button>
 </div> 
@@ -138,8 +138,8 @@
 
                 <tbody>
                     <tr *ngFor="let item of items; let i = index">
-                        <td *ngIf="!hideVal" ><strong>{{ item.name }}</strong></td>
-                        <td *ngIf="hideVal" > <input type="text" [value]="item.name"></td>
+                        <td nowrap><strong>{{ item.name }}</strong></td>
+                     
                         <td nowrap>{{ item.size/1024/1024|number:'.2'}} MB</td>
                         <td nowrap contenteditable='true'>{{item.lastModifiedDate|date}}</td>
       

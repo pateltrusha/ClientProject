@@ -26,7 +26,7 @@ export class CollectionsComponent implements OnInit {
   // public uploader:FileUploader = new FileUploader({url:'https://evening-anchorage-3159.herokuapp.com/api/'});
       public hasBaseDropZoneOver:boolean = false;
       param1:any;
-      items:any=[];
+     items:any=[];
      _items = new Array();
      _f:any;
      cur_name:string;
@@ -43,8 +43,7 @@ export class CollectionsComponent implements OnInit {
     private toastrService: ToastrService) {
     // this.baseUrl = configService.getApiURI();
     this.param1=this.activatedRoute.snapshot.queryParams["id"];
-   debugger
-   console.log(this.uploader);
+   
    
    }
 
@@ -53,18 +52,24 @@ export class CollectionsComponent implements OnInit {
       this.toastrService.overlayContainer = this.toastContainer;
      this.getFiles();
   }
-
+//items: Array<File> = [];
   //choose file from  dialouge 
  fileChangeEvent(fileInput: any){
    debugger
-        this.items=fileInput.target.files; 
+
+     this.items.push(fileInput.target.files[0]); 
+       
+        
         console.log(this.items);   
      }
 
 // file dropping
  dropped(fileInput: any){
     debugger
-    this.items= fileInput; 
+    console.log("WITH DRAG....",fileInput)
+     console.log(this.items); 
+     this.items.push(fileInput[0]);
+      console.log(this.items);  
   }
 
   //listing all files
@@ -120,8 +125,7 @@ export class CollectionsComponent implements OnInit {
   //remove from uploading list
   remove(i){  
     debugger
-   this.items=[];
-  }
+   this.items.splice(i, 1);  }
 
   
   public fileOverBase(e:any):void {
