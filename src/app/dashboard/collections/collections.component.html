@@ -1,4 +1,6 @@
- <!--  preview modal -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--  preview modal -->
 <ng-template #template_preview>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
@@ -10,10 +12,10 @@
     <img src="//placehold.it/1000x600" class="img-responsive">
   </div>
   <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="modalRefPrev.hide()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="modalRefPrev.hide()">Cancel</button>
   </div>
 </ng-template>
- 
+
 <!--  rename modal -->
 <ng-template #template_rename>
   <div class="modal-header">
@@ -23,158 +25,164 @@
     </button>
   </div>
   <div class="modal-body">
-      <div class="row">
-            <div class="form-group">
-              
-                <input class="form-control input-md-3" placeholder="File Name" type="text" [ngModel]="cur_name" #model (change)="changeEvent(model.value)"/><br>
-                  <!-- <span style="color:red" *ngIf="!cur_name">
-                         file name is required
-                  </span> -->
-            </div>
-        </div>
+    <div class="row">
+      <div class="form-group">
+
+        <input class="form-control input-md-3" placeholder="File Name" type="text" [ngModel]="cur_name" #model (change)="changeEvent(model.value)" /><br>
+        <!-- <span style="color:red" *ngIf="!cur_name">
+               file name is required
+        </span> -->
+      </div>
+    </div>
   </div>
-  <div  class="modal-footer">
-        <button class="btn btn-info" [disabled]="!cur_name" (click)="renameFile(fileData)"> Rename </button> 
-        <button class="btn btn-danger" (click)="modalRefRename.hide()"> Cancel</button>
+  <div class="modal-footer">
+    <button class="btn btn-info" [disabled]="!cur_name" (click)="renameFile(fileData)"> Rename </button>
+    <button class="btn btn-danger" (click)="modalRefRename.hide()"> Cancel</button>
   </div>
 </ng-template>
 
 <ng-template #template_remove>
   <div class="modal-header">
-      <h4 class="modal-title pull-left">Are you sure?</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefRemove.hide()">
-        <span aria-hidden="true">&times;</span>
-     </button>
+    <h4 class="modal-title pull-left">Are you sure?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefRemove.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   <div class="modal-body">
     <p>Do you really want to delete these records? This process cannot be undone.</p>
   </div>
   <div class="modal-footer">
-        <button type="button" class="btn btn-info" (click)="modalRefRemove.hide()">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="removeFile(fileData)">Delete</button>
+    <button type="button" class="btn btn-info" (click)="modalRefRemove.hide()">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="removeFile(fileData)">Delete</button>
   </div>
 </ng-template>
 
 <div class="toolbar_container">
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-times icon"></i>Delete</button>
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-external-link-square icon"></i>Move</button>
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-copy icon"></i>Copy</button>
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-chain icon"></i>Copy Link</button>
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-pencil icon"></i>Rename</button>
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-code icon"></i>Embed</button>
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-folder icon"></i>Inactive Files</button>
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-flag icon"></i>Abuses</button>
-                <button type="button" class="btn_secondary">
-                    <i class="fa fa-folder-open icon"></i>Create Folder</button>
-                 <input type="file" id="fileLoader" name="files" #file ng2FileSelect [uploader]="uploader" (change)="fileSelect($event)">
-                <button id="btnOpenFileDialog" (click)="file.click()" class="btn_primary">
-                    <i class="fa fa-cloud-upload icon"></i>Upload</button>
-</div> 
-
-<h3>Uploded files</h3>
-<div class="grid_container">
-     <div class="row">    
-         <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th width="50%">Name</th>                        
-                        <th>Size</th>
-                        <th>Uploaded Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let file of uploadedFiles" [contextMenu]="componentMenu" [contextMenuSubject]="item">
-                        <td><strong>{{ file.name }}{{file.extension}}</strong></td>
-                        <td nowrap>{{ file.size/1024/1024|number:'.2'}} MB</td>
-                        <td nowrap contenteditable='true'>{{file.create_time|date}}</td>
-                        <td><button (click)="renameModal(template_rename,file)">Rename</button></td>
-                        <td><button (click)="removeModal(template_remove,file)"> Remove</button></td>
-                     <context-menu #componentMenu>
-                          <ng-template contextMenuItem (execute)="previewModal(template_preview)"> Preview
-                         </ng-template>
-                
-                         <ng-template contextMenuItem let-item (execute)="renameModal(template_rename,file)"> Rename
-                         </ng-template>
-              
-                         <ng-template contextMenuItem let-item (execute)="removeModal(template_remove,file)"> Remove File
-                         </ng-template>
-                     </context-menu>
-                   </tr>
-               </tbody>
-            </table>
-                
-            </div>
-          </div>
+  <!--<button type="button" class="btn_secondary">
+      <i class="fa fa-times icon"></i>Delete</button>
+  <button type="button" class="btn_secondary">
+      <i class="fa fa-external-link-square icon"></i>Move</button>
+  <button type="button" class="btn_secondary">
+      <i class="fa fa-copy icon"></i>Copy</button>
+  <button type="button" class="btn_secondary">
+      <i class="fa fa-chain icon"></i>Copy Link</button>
+  <button type="button" class="btn_secondary">
+      <i class="fa fa-pencil icon"></i>Rename</button>
+  <button type="button" class="btn_secondary">
+      <i class="fa fa-code icon"></i>Embed</button>
+  <button type="button" class="btn_secondary">
+      <i class="fa fa-folder icon"></i>Inactive Files</button>
+  <button type="button" class="btn_secondary">
+      <i class="fa fa-flag icon"></i>Abuses</button>
+  <button type="button" class="btn_secondary">
+      <i class="fa fa-folder-open icon"></i>Create Folder</button>-->
+  <input type="file" id="fileLoader" name="files" #file ng2FileSelect [uploader]="uploader" (change)="fileSelect($event)">
+  <button id="btnOpenFileDialog" (click)="file.click()" class="btn_primary">
+    <i class="fa fa-cloud-upload icon"></i>Upload
+  </button>
 </div>
 
-<div class="grid_container">
-     <div class="row">    
-         <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th width="50%">Name</th>
-                        <th>Size</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                     <tr *ngFor="let file of _files; let i= index ">
-                        <td nowrap><strong>{{ file.name }}</strong></td>
-                        <td nowrap>{{ file.size/1024/1024|number:'.2'}} MB</td>
-                        <td nowrap contenteditable='true'>{{file.lastModifiedDate|date}}</td>
-                        <td nowrap>
-                            <button type="button" class="btn btn-success btn-xs"
-                              (click)="uploadFile(i)">
-                                <span class="glyphicon glyphicon-upload"></span> Upload
-                            </button>
-                            <button type="button" class="btn btn-danger btn-xs"
-                              (click)="remove(i)">
-                                <span class="glyphicon glyphicon-trash"></span> Remove
-                            </button>
-                        </td>
-                    </tr>
-               </tbody>
-            </table>
-
- 
-            
-        </div>
-        <br/><br/><br/>
- <br/><br/><br/>
-                <div class="draganddrop_container">
-                    <div class="dragdroptextcontainer">
-                        <div class="draganddrop_text_container">
-
-                            <i class="fa fa-cloud-upload dragdrop_icon" ng2FileDrop
-                      [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-                      (fileOver)="fileOverBase($event)"
-                      (onFileDrop)="dropped($event)"
-                      [uploader]="uploader"></i>
-                            <label class="draganddrop_text">Drag and Drop Here</label> 
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
 
 
-           
+<div class="content_container">
+  
+  <div class="grid_container">
+    <b><u>UPLOADED FILES</u></b>
     
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+          <th>Uploaded Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of uploadedFiles" [contextMenu]="componentMenu" [contextMenuSubject]="item">
+          <td><strong>{{ file.name }}{{file.extension}}</strong></td>
+          <td nowrap>{{ file.size/1024/1024|number:'.2'}} MB</td>
+          <td nowrap contenteditable='true'>{{file.create_time|date}}</td>
+          <td><button (click)="renameModal(template_rename,file)">Rename</button></td>
+          <td><button (click)="removeModal(template_remove,file)"> Remove</button></td>
+          <context-menu #componentMenu>
+            <ng-template contextMenuItem (execute)="previewModal(template_preview)">
+              Preview
+            </ng-template>
+
+            <ng-template contextMenuItem let-item (execute)="renameModal(template_rename,file)">
+              Rename
+            </ng-template>
+
+            <ng-template contextMenuItem let-item (execute)="removeModal(template_remove,file)">
+              Remove File
+            </ng-template>
+          </context-menu>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid_container">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let file of _files; let i= index ">
+          <td nowrap><strong>{{ file.name }}</strong></td>
+          <td nowrap>{{ file.size/1024/1024|number:'.2'}} MB</td>
+          <td nowrap contenteditable='true'>{{file.lastModifiedDate|date}}</td>
+          <td nowrap>
+            <button type="button" class="btn btn-success btn-xs"
+                    (click)="uploadFile(i)">
+              <span class="glyphicon glyphicon-upload"></span> Upload
+            </button>
+            <button type="button" class="btn btn-danger btn-xs"
+                    (click)="remove(i)">
+              <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
 
 
-       
+  </div>
+     
+      <div class="draganddrop_container">
+        <div class="dragdroptextcontainer">
+          <div class="draganddrop_text_container">
+
+            <i class="fa fa-cloud-upload dragdrop_icon" ng2FileDrop
+               [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+               (fileOver)="fileOverBase($event)"
+               (onFileDrop)="dropped($event)"
+               [uploader]="uploader"></i>
+            <label class="draganddrop_text">Drag and Drop Here</label>
+          </div>
+        </div>
+      </div>
+
+   
+  
+</div>
+  
+
+  
+
+
+
+
+
+
+
+
 

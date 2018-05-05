@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700" rel="stylesheet">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/dashboard.css" />
 <ng-template #template_folder>
   <div class="modal-header">
     <h4 class="modal-title pull-left">New Folder</h4>
@@ -9,20 +10,20 @@
     </button>
   </div>
   <div class="modal-body">
-         <div class="row">
-            <div class="form-group">
-              
-                <input class="form-control input-md-3" placeholder="Folder Name"
-                 type="text" [(ngModel)]="f_name" /><br>
-                  <!-- <span style="color:red" *ngIf="!f_name">
-                         folder name is required
-                  </span> -->
-            </div>
-        </div>
- </div>
-    <div  class="modal-footer">
-        <button  class="btn btn-info" [disabled]="!f_name" (click)="createFolder(f_name)"> Create </button> 
-        <button class="btn btn-danger" (click)="modalRef.hide()"> Cancel</button>
+    <div class="row">
+      <div class="form-group">
+
+        <input class="form-control input-md-3" placeholder="Folder Name"
+               type="text" [(ngModel)]="f_name" /><br>
+        <!-- <span style="color:red" *ngIf="!f_name">
+               folder name is required
+        </span> -->
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-info" [disabled]="!f_name" (click)="createFolder(f_name)"> Create </button>
+    <button class="btn btn-danger" (click)="modalRef.hide()"> Cancel</button>
   </div>
 
 </ng-template>
@@ -36,9 +37,9 @@
       <a class="fa fa-user" [routerLink]="['updateprofile']"> </a>
     </li>
     <li>
-      <a class="fa fa-file-text-o"  [routerLink]="['']" > </a>
+      <a class="fa fa-file-text-o" [routerLink]="['']"> </a>
     </li>
-    <li >
+    <li>
       <a class="fa fa-share-alt"></a>
     </li>
     <li>
@@ -47,8 +48,8 @@
     <li>
       <a class="fa fa-line-chart"></a>
     </li>
-    <li >
-      <a class="fa fa-cog" ></a>
+    <li>
+      <a class="fa fa-cog"></a>
     </li>
   </ul>
 </div>
@@ -63,7 +64,7 @@
           <li>
             <a href="dashboard">{{router.url}}</a>
           </li>
-          
+
         </ul>
       </div>
 
@@ -72,11 +73,11 @@
       <div class="search_container">
         <input type="text" placeholder="Search" />
         <i class="fa fa-search"></i>
-      </div><br><br/>
-       <div>
-        <span style="margin-left: 8px">{{path || 'Files'}}</span>
-  <span class="spacer"></span>
       </div>
+      <!--<div>
+        <span style="margin-left: 8px">{{path || 'Files'}}</span>
+        <span class="spacer"></span>
+      </div>-->
     </div>
     <div class="pull-right">
       <ul class="top_right_nav">
@@ -104,12 +105,12 @@
   </nav>
   <div class="main_contentarea">
 
-    <h3> Custom Path</h3>
+    <!--<h3> Custom Path</h3>
     <a><span class="glyphicon glyphicon-arrow-left fa-2x"></span></a>
     <a><span style="margin-left: 8px">{{path || 'Home/'}}</span></a>
-    <a> <span class="spacer"></span></a>
-     <div toastContainer style="float: right;"></div><br/><br/>
-    <router-outlet></router-outlet> 
+    <a> <span class="spacer"></span></a>-->
+    <div toastContainer style="float: right;"></div>
+    <router-outlet></router-outlet>
 
 
 

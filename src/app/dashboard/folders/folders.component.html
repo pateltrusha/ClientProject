@@ -7,52 +7,78 @@
     </button>
   </div>
   <div class="modal-body">
-      <div class="row">
-            <div class="form-group">
-              
-                <input class="form-control input-md-3" type="text" [ngModel]="cur_name" #model (change)="changeEvent(model.value)"/>
-            </div>
-        </div>
+    <div class="row">
+      <div class="form-group">
+
+        <input class="form-control input-md-3" type="text" [ngModel]="cur_name" #model (change)="changeEvent(model.value)" />
+      </div>
+    </div>
   </div>
-  <div  class="modal-footer">
-        <button class="btn btn-info" (click)="renameFolder(_folder)"> Rename </button> 
-        <button class="btn btn-danger" (click)="modalRefRename.hide()"> Cancel</button>
+  <div class="modal-footer">
+    <button class="btn btn-info" (click)="renameFolder(_folder)"> Rename </button>
+    <button class="btn btn-danger" (click)="modalRefRename.hide()"> Cancel</button>
   </div>
 </ng-template>
 
 <ng-template #template_remove>
   <div class="modal-header">
-      <h4 class="modal-title pull-left">Are you sure?</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefRemove.hide()">
-        <span aria-hidden="true">&times;</span>
-     </button>
+    <h4 class="modal-title pull-left">Are you sure?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRefRemove.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   <div class="modal-body">
     <p>Do you really want to delete these Folder? This process cannot be undone.</p>
   </div>
   <div class="modal-footer">
-     <button type="button" class="btn btn-danger" (click)="removeFolder(_folder)">Delete</button>
-        <button type="button" class="btn btn-info" (click)="modalRefRemove.hide()">Cancel</button>
-       
+    <button type="button" class="btn btn-danger" (click)="removeFolder(_folder)">Delete</button>
+    <button type="button" class="btn btn-info" (click)="modalRefRemove.hide()">Cancel</button>
+
   </div>
 </ng-template>
 <!-- <button (click)="showFiles()">click</button> -->
-<ul *ngFor="let folder of folders" [contextMenu]="componentMenu" [contextMenuSubject]="item">
-	<li>
+<div class="col-xs-12 col-sm-9 ">
+ 
+    <div class="listing-container">
+      <div class="row m0 listing-row hidden-xs listing-header">
+        <div class="col-xs-12 col-sm-4 gridhide"><h2>Name</h2></div>
+        <div class="col-xs-12 col-sm-3 gridhide"><h2>Updated </h2></div>
+        <div class="col-xs-12 col-sm-2 gridhide"><h2>Size</h2></div>
 
-		<!-- <a (click)="moveToCollection(folder)"  [routerLink]="['folders']" [queryParams]="{ id: folder.id}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{folder.name}}</a> -->
-    <a (click)="moveToCollection(folder)"> <i class="fas fa-folder" style="font-size:48px;"></i>{{folder.name}}</a>
-	</li>
-	 <context-menu #componentMenu>
-          
-            <ng-template contextMenuItem let-item (execute)="renameModal(template_rename,folder)">
+
+      </div>
+      <div class="listing-row" data-mcs-theme="minimal" *ngFor="let folder of folders" [contextMenu]="componentMenu" [contextMenuSubject]="item">
+        <div class="row m0 listing-row forgrid">
+          <div class="col-xs-12 col-sm-4"><a (click)="moveToCollection(folder)" style="cursor:pointer"><img class="grid-logo" src="../../assets/image/folder.png" width="30" class="table-img"> <p class="gridpadding">{{folder.name}}</p></a></div>
+          <div class="col-xs-12 col-sm-3"><p class="gridpadding">{{folder.updateTime| date}}</p></div>
+          <div class="col-xs-12 col-sm-2"><p class="gridpadding">--</p></div>
+
+        </div>
+        <context-menu #componentMenu>
+
+          <ng-template contextMenuItem let-item (execute)="renameModal(template_rename,folder)">
             Rename Folder
-            </ng-template>
-        
-            <ng-template contextMenuItem let-item (execute)="removeModal(template_remove,folder)">
-            Remove Folder
-            </ng-template>
-      </context-menu>
+          </ng-template>
 
-</ul>
+          <ng-template contextMenuItem let-item (execute)="removeModal(template_remove,folder)">
+            Remove Folder
+          </ng-template>
+        </context-menu>
+
+      </div>
+
+    </div>
+
+
+</div>
+
+  <!--<ul *ngFor="let folder of folders" [contextMenu]="componentMenu" [contextMenuSubject]="item">
+    <li>-->
+
+      <!-- <a (click)="moveToCollection(folder)"  [routerLink]="['folders']" [queryParams]="{ id: folder.id}"> <i class="fas fa-folder" style="font-size:48px;"></i>{{folder.name}}</a> -->
+      <!--<a (click)="moveToCollection(folder)"> <i class="fas fa-folder" style="font-size:48px;"></i>{{folder.name}}</a>
+    </li>
+    
+
+  </ul>-->
 
