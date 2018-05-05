@@ -45,10 +45,17 @@ path:any;
       this.folderService.createFolder(file_name)
       .subscribe(
                           data => {
+                            if(this.router.url=='/dashboard'){
+                              this.pageRefresh();
+
+                            }
+                            else{
+                              this.router.navigated = false;
+                              this.router.navigate(['/dashboard']);
+                            }
                       this.toastrService.success('Folder created!');
-                           //this.router.navigated = false;
-                        //  this.router.navigate([this.router.url]);
-                            this.pageRefresh();
+
+                                        //this.pageRefresh();
                            
                                  },
                           error => {
