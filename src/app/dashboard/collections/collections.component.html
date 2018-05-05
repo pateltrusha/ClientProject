@@ -26,12 +26,15 @@
       <div class="row">
             <div class="form-group">
               
-                <input class="form-control input-md-3" type="text" [ngModel]="cur_name" #model (change)="changeEvent(model.value)"/>
+                <input class="form-control input-md-3" placeholder="File Name" type="text" [ngModel]="cur_name" #model (change)="changeEvent(model.value)"/><br>
+                  <!-- <span style="color:red" *ngIf="!cur_name">
+                         file name is required
+                  </span> -->
             </div>
         </div>
   </div>
   <div  class="modal-footer">
-        <button class="btn btn-info" (click)="renameFile(fileData)"> Rename </button> 
+        <button class="btn btn-info" [disabled]="!cur_name" (click)="renameFile(fileData)"> Rename </button> 
         <button class="btn btn-danger" (click)="modalRefRename.hide()"> Cancel</button>
   </div>
 </ng-template>

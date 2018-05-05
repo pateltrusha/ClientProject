@@ -88,7 +88,7 @@ export class CollectionsComponent implements OnInit {
      //upload new files
    uploadFile(i)
    {
-     debugger
+  
     const fileEvent: FileList = this._files;
     const file: File = fileEvent[0];
     console.log(file);
@@ -133,7 +133,7 @@ export class CollectionsComponent implements OnInit {
 
   //will open file dialog when click on upload button
  openfileDialog() {
-   debugger
+
    this._file.click();
   }
 
@@ -162,7 +162,7 @@ export class CollectionsComponent implements OnInit {
 
  //rename file
   renameFile(file){
-    debugger
+ 
      const fileData={
         "cur_name":this.cur_name,
         "new_name":this.new_name,
@@ -197,7 +197,7 @@ export class CollectionsComponent implements OnInit {
 
   //remove file
      removeFile(file){
-       debugger
+  
        this.modalRefRemove.hide();
         const fileData={
              "u_cID":file.collection_id,
