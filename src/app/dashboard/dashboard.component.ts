@@ -16,9 +16,6 @@ export class DashboardComponent implements OnInit {
 _route:any=[];
 path:any;
 
-  // @ViewChild(FoldersComponent)
-  // private folder: FoldersComponent;
-
 
   constructor(private authService: AuthService,
               private modalService: BsModalService,
@@ -27,13 +24,11 @@ path:any;
               private router: Router,
               private toastrService: ToastrService,
               private location: Location) {
-   
-    this.router = router;
-            console.log(this.router.url); //  /routename 
-    }
-   collections:any;
+
+        }
+ 
   ngOnInit() {
-    debugger
+
     // console.log(this.folder)
     //  this.path=this.folder.currentPath;
     // console.log(this.path);
@@ -50,24 +45,25 @@ path:any;
       this.folderService.createFolder(file_name)
       .subscribe(
                           data => {
-                           console.log(data);
-                               this.router.navigated = false;
-                               this.router.navigate([this.router.url]);
-                            //this.pageRefresh();
+                      this.toastrService.success('Folder created!');
+                           //this.router.navigated = false;
+                        //  this.router.navigate([this.router.url]);
+                            this.pageRefresh();
                            
-                            this.toastrService.success('Folder created Successfully!');   
                                  },
                           error => {
-                             this.toastrService.error('Error while updating!');
+                             this.toastrService.error('Error while creating folder!');
                            
                           });
-
+ 
+    // 
+  
   }
 
-//  pageRefresh() {
-//    debugger
-//    location.reload();
-// }
+ pageRefresh() {
+
+   location.reload();
+}
     ///modal pop up
    modalRef: BsModalRef;
    createModal(t) {

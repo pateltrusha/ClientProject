@@ -25,7 +25,7 @@ import { UserModule } from './user/user.module';
     ToastrModule.forRoot({ positionClass: 'toast-top-left',preventDuplicates: true }),
     ToastContainerModule,
     ModalModule.forRoot(),
-     ContextMenuModule.forRoot({
+    ContextMenuModule.forRoot({
       autoFocus: true,
       // useBootstrap4: true,
     }),

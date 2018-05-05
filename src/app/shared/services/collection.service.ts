@@ -50,7 +50,7 @@ export class CollectionService {
 
     //remove files
      removeFile(file){
-       debugger
+   
          let body = JSON.stringify(file);
         let headers: Headers = new Headers();
                   headers.append('Content-Type', 'application/json');
